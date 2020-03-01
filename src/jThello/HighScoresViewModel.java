@@ -1,14 +1,13 @@
 package jThello;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class aboutViewModel implements ModelInterface {
+public class HighScoresViewModel implements ModelInterface {
 
 	@Override
 	public void initializePanel(MainWindow window) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

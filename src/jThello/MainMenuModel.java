@@ -24,6 +24,7 @@ public class MainMenuModel implements ModelInterface {
 	public JButton aboutButton = new JButton("About");
 	public JButton exitButton = new JButton("Exit");
 	
+	@Override
 	public void initializePanel(MainWindow window) {
 		// Add elements to screen.
 		mainMenuView.add(tagline);
@@ -41,6 +42,7 @@ public class MainMenuModel implements ModelInterface {
 		mainMenuView.setLayout(new GridLayout(0, 1, 5, 5));
 	}
 	
+	@Override
 	public JPanel getModel() {
 		return mainMenuView;
 	}
