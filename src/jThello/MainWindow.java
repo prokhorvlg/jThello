@@ -1,6 +1,7 @@
 package jThello;
 
 import java.awt.Container;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
@@ -11,11 +12,13 @@ public class MainWindow extends JFrame {
 	// Different front end views.
 	public ModelInterface mainMenuModel;
 	public ModelInterface aboutViewModel;
+	public ModelInterface gameViewModel;
 	
 	// Initialize the window at start of program.
-	public MainWindow() {
+	public MainWindow() throws IOException {
 		mainMenuModel = new MainMenuModel();
 		aboutViewModel = new AboutViewModel();
+		gameViewModel = new GameViewModel();
 		// Initialize the content for all of the screens.
 		initializePanels();
 		
@@ -38,9 +41,10 @@ public class MainWindow extends JFrame {
 	};
 	
 	// Initializes all of the views with elements, content, and event listeners.
-	private void initializePanels() {
+	private void initializePanels() throws IOException {
 		mainMenuModel.initializePanel(this);
 		aboutViewModel.initializePanel(this);
+		gameViewModel.initializePanel(this);
 	}
 	
 	public void Display() {

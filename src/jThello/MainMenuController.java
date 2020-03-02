@@ -19,13 +19,13 @@ public class MainMenuController {
 	
 	private class newGameAIButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			window.openView(window.aboutViewModel);
+			window.openView(window.gameViewModel);
 		}
 	}
 	
 	private class newGamePlayerButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			window.openView(window.aboutViewModel);
+			window.openView(window.gameViewModel);
 		}
 	}
 	
