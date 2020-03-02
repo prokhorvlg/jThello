@@ -3,10 +3,10 @@ package jThello;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HighScoresController {
-	private MainWindow window;
+public class RulesController {
+	MainWindow window;
 	
-	public void initializeEventHandlers(HighScoresViewModel model, MainWindow _window) {
+	public void initializeEventHandlers(RulesViewModel model, MainWindow _window) {
 		window = _window;
 		model.backButton.addActionListener(new backButtonListener());
 	}

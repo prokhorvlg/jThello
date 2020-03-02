@@ -1,8 +1,6 @@
 package jThello;
 
-import java.awt.Container;
 import java.io.IOException;
-
 import javax.swing.JFrame;
 
 public class MainWindow extends JFrame {
@@ -13,12 +11,17 @@ public class MainWindow extends JFrame {
 	public ModelInterface mainMenuModel;
 	public ModelInterface aboutViewModel;
 	public ModelInterface gameViewModel;
+	public ModelInterface highScoresModel;
+	public ModelInterface rulesModel;
 	
 	// Initialize the window at start of program.
 	public MainWindow() throws IOException {
 		mainMenuModel = new MainMenuModel();
 		aboutViewModel = new AboutViewModel();
 		gameViewModel = new GameViewModel();
+		highScoresModel = new HighScoresViewModel();
+		rulesModel = new RulesViewModel();
+		
 		// Initialize the content for all of the screens.
 		initializePanels();
 		
@@ -29,6 +32,7 @@ public class MainWindow extends JFrame {
 		// Open main menu view.
 		openView(mainMenuModel);
 		this.Display();
+	    this.setVisible(true);	
 	};
 	
 	// Opens a given view in this window.
@@ -45,12 +49,13 @@ public class MainWindow extends JFrame {
 		mainMenuModel.initializePanel(this);
 		aboutViewModel.initializePanel(this);
 		gameViewModel.initializePanel(this);
+		highScoresModel.initializePanel(this);
+		rulesModel.initializePanel(this);
 	}
 	
 	public void Display() {
 		this.pack();
-		this.setSize(900,900);
-	    this.setVisible(true);		
+		this.setSize(550,525);
 	}
 	
 	// GAME VIEW FRONT END

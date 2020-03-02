@@ -2,16 +2,15 @@ package jThello;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
-public class AboutViewModel implements ModelInterface {
-	
-	public AboutController aboutController;
-	public JPanel aboutView;
+public class RulesViewModel implements ModelInterface {
+	public RulesController rulesController;
+	public JPanel rulesView;
 	private JLabel jlabel;
 	
 	private JEditorPane contentPane;
@@ -20,9 +19,9 @@ public class AboutViewModel implements ModelInterface {
 	public JPanel backButtonPanel;
 	public JButton backButton;
 	
-	AboutViewModel() {
-		aboutController = new AboutController();
-		aboutView = new JPanel(new BorderLayout());
+	RulesViewModel() {
+		rulesController = new RulesController();
+		rulesView = new JPanel(new BorderLayout());
 	}     
 
 	@Override
@@ -32,30 +31,47 @@ public class AboutViewModel implements ModelInterface {
 		buildAboutPanel();
 		buildBackPanel();
 	    // Add event listeners to buttons.
-	    aboutController.initializeEventHandlers(this, window);
+		rulesController.initializeEventHandlers(this, window);
 	}
 
 	@Override
 	public JPanel getModel() {
-		return aboutView;
+		return rulesView;
 	}
 	
 	// Constructs the panel containing the title
 	private void buildTitlePanel() {
-		jlabel = new JLabel("About");
+		jlabel = new JLabel("Rules");
 		jlabel.setHorizontalAlignment(JLabel.CENTER);
-		aboutView.add(jlabel, BorderLayout.NORTH);
+		rulesView.add(jlabel, BorderLayout.NORTH);
 	}
 	
 	// Constructs the panel containing the About information
 	private void buildAboutPanel() {
-		String aboutText = "Welcome to JThello!";
+		String aboutText = getOthelloRules();
 		contentPane = new JEditorPane();
 		contentPane.setEditable(false);
 		contentPane.setText(aboutText);
         JScrollPane scrollPane = new JScrollPane(contentPane);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        aboutView.add(scrollPane, BorderLayout.CENTER);
+        rulesView.add(scrollPane, BorderLayout.CENTER);
+	}
+	
+	private String getOthelloRules() {
+		// TODO: Load rules from a text file
+		String res = "THE OFFICIAL RULES OF OTHELLO\n";
+		res += "These rules have been divided into ten separate sections as follows:\n";
+		res += "                  1. Equipment\n";
+		res += "                  2. The Starting Position\n";
+		res += "                  3. The Move\n";
+		res += "                  4. Determining the Winner and Scoring the Game\n";
+		res += "                  5. The Timepiece\n";
+		res += "                  6. Default\n";
+		res += "                  7. Improper Moves\n";
+		res += "                  8. General Conduct\n";
+		res += "                  9. Penalties\n";
+		res += "                  10. Miscellaneous\n";
+		return res;
 	}
 	
 	// Constructs the panel containing the back button
@@ -64,6 +80,6 @@ public class AboutViewModel implements ModelInterface {
 		backButton.setPreferredSize(new Dimension(80, 40));
 		JPanel backButtonPanel = new JPanel(new BorderLayout());
 		backButtonPanel.add(backButton, BorderLayout.LINE_END);
-		aboutView.add(backButtonPanel, BorderLayout.SOUTH);	
+		rulesView.add(backButtonPanel, BorderLayout.SOUTH);	
 	}
 }

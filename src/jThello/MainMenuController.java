@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class MainMenuController {
 	
-	MainWindow window;
+	private MainWindow window;
 	
 	public void initializeEventHandlers(MainMenuModel model, MainWindow _window) {
 		window = _window;
@@ -31,13 +31,13 @@ public class MainMenuController {
 	
 	private class highScoresButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			window.openView(window.aboutViewModel);
+			window.openView(window.highScoresModel);
 		}
 	}
 	
 	private class rulesButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			window.openView(window.aboutViewModel);
+			window.openView(window.rulesModel);
 		}
 	}
 	

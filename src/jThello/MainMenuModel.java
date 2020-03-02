@@ -3,7 +3,6 @@ package jThello;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -15,7 +14,7 @@ public class MainMenuModel implements ModelInterface {
 	
 	// MAIN MENU VIEW FRONT END
 	
-	JLabel tagline = new JLabel("this shit dumb af");
+	JLabel tagline = new JLabel("JThello");
 	
 	public JButton newGameAIButton = new JButton("New Game vs AI");
 	public JButton newGamePlayerButton = new JButton("New Game vs Player");
@@ -39,7 +38,7 @@ public class MainMenuModel implements ModelInterface {
 		mainMenuController.initializeEventHandlers(this, window);
 		
 		// Set layout of this panel.
-		mainMenuView.setLayout(new GridLayout(0, 1, 5, 5));
+		mainMenuView.setLayout(new GridLayout(0, 1, 5, 0));
 	}
 	
 	@Override
