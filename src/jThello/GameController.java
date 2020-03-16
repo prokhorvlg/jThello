@@ -1,8 +1,7 @@
 package jThello;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class GameController {
@@ -15,17 +14,43 @@ public class GameController {
 		window = _window;
 
 		gameViewModel.rulesButton.addActionListener(new rulesButtonListener());
+		initializeBoardEventHandlers();
 	}
 
 	private class rulesButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			try {
-				resetBoard();
-			} catch (IOException ex) {
-				ex.printStackTrace();
+			window.openView(window.mainMenuModel);
+		}
+	}
+
+	private void initializeBoardEventHandlers() {
+		// Cycle through each icon in the array, and attach the event listener.
+		// For each row...
+		for (int x = 0; x < 8; x++) {
+			// For each column...
+			for (int y = 0; y < 8; y++) {
+				gameViewModel.boardIcons[x][y].addMouseListener(new boardIconListener(x, y));
 			}
 		}
 	}
+
+	private static class boardIconListener extends MouseAdapter {
+		private int x, y;
+		boardIconListener(int _x, int _y) {
+			x = _x;
+			y = _y;
+		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// THIS IS THE EVENT HANDLER FOR BOARD PIECES.
+			// When this is run, the variables x and y are stored in order for the back end to know what was clicked.
+
+			// gameInput(x, y);
+
+			// TODO: Enter back end call here.
+		}
+	}
+
 
 	// Event handlers for each of the squares. Back end will handle bad input.
 
