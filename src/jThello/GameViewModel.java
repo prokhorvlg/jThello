@@ -64,18 +64,18 @@ public class GameViewModel implements ModelInterface {
 	// 1.3.2 Score Trackers
 		
 	JPanel tracker1Panel = new JPanel();
-	JLabel tracker1Name = new JLabel("YOU");
+	JLabel tracker1Name = new JLabel("P1");
 	
 	JPanel tracker1LowerPanel = new JPanel();
 	JLabel tracker1Piece = new JLabel("O");
-	JLabel tracker1Score = new JLabel("x 7");
+	JLabel tracker1Score = new JLabel("x NUM");
 	
 	JPanel tracker2Panel = new JPanel();
-	JLabel tracker2Name = new JLabel("THEM");
+	JLabel tracker2Name = new JLabel("P2");
 	
 	JPanel tracker2LowerPanel = new JPanel();
 	JLabel tracker2Piece = new JLabel("O");
-	JLabel tracker2Score = new JLabel("x 4");
+	JLabel tracker2Score = new JLabel("x NUM");
 	
 	// 2. Lower half
 	
@@ -313,10 +313,11 @@ public class GameViewModel implements ModelInterface {
 
 		JPanel rightTurnP = new JPanel();
 		JPanel rightScoreP1 = new JPanel();
+		JPanel rightScoreP2 = new JPanel();
+		JPanel rightStatus = new JPanel();
 		JPanel rightInvisibleBlock = new JPanel();
 
 		rightTurnP.setBackground( new Color(0, 0, 0, 0) );
-		rightScoreP1.setBackground( new Color(0, 0, 0, 0) );
 		rightInvisibleBlock.setBackground( new Color(0, 0, 0, 0) );
 
 		// -- TURN (label which displays who's turn it is)
@@ -336,21 +337,108 @@ public class GameViewModel implements ModelInterface {
 
 		rightTurnP.add(Box.createHorizontalGlue());
 
-		// -- SCORE
+		// -- SCORE 1
 
+		// Set up primary container.
 		rightScoreP1.setLayout(new BoxLayout(rightScoreP1, BoxLayout.Y_AXIS));
+		rightScoreP1.setBackground(Color.WHITE);
 
+		// Set up "upper container", which contains the player name.
 		tracker1Panel.setLayout(new BoxLayout(tracker1Panel, BoxLayout.X_AXIS));
+		tracker1Panel.setBackground( new Color(0, 0, 0, 0) );
+		tracker1Name.setFont(window.fontTexBold.deriveFont(30f));
+		tracker1Name.setForeground(Color.BLACK);
+		tracker1Panel.add(Box.createRigidArea(new Dimension(20, 0)));
 		tracker1Panel.add(tracker1Name);
 		tracker1Panel.add(Box.createHorizontalGlue());
+
+		// Set up "lower container", which contains piece and score count.
 		tracker1LowerPanel.setLayout(new BoxLayout(tracker1LowerPanel, BoxLayout.X_AXIS));
+		tracker1LowerPanel.setBackground( new Color(0, 0, 0, 0) );
+		tracker1Piece = loadImage("images/jThello-piece-black.png");
+		tracker1Score.setFont(window.fontTexBold.deriveFont(20f));
+		tracker1Score.setForeground(Color.BLACK);
+		tracker1LowerPanel.add(Box.createRigidArea(new Dimension(20, 0)));
 		tracker1LowerPanel.add(tracker1Piece);
+		tracker1LowerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
 		tracker1LowerPanel.add(tracker1Score);
-		tracker1Panel.add(Box.createHorizontalGlue());
+		tracker1LowerPanel.add(Box.createHorizontalGlue());
 
+		// Combine all elements to create final score panel.
 		rightScoreP1.add(tracker1Panel);
+		rightScoreP1.add(Box.createRigidArea(new Dimension(0, 5)));
 		rightScoreP1.add(tracker1LowerPanel);
+		rightScoreP1.add(Box.createRigidArea(new Dimension(0, 15)));
 
+		// -- SCORE 2
+
+		// Set up primary container.
+		rightScoreP2.setLayout(new BoxLayout(rightScoreP2, BoxLayout.Y_AXIS));
+		rightScoreP2.setBackground(Color.BLACK);
+
+		// Set up "upper container", which contains the player name.
+		tracker2Panel.setLayout(new BoxLayout(tracker2Panel, BoxLayout.X_AXIS));
+		tracker2Panel.setBackground( new Color(0, 0, 0, 0) );
+		tracker2Name.setFont(window.fontTexBold.deriveFont(30f));
+		tracker2Name.setForeground(Color.WHITE);
+		tracker2Panel.add(Box.createRigidArea(new Dimension(20, 0)));
+		tracker2Panel.add(tracker2Name);
+		tracker2Panel.add(Box.createHorizontalGlue());
+
+		// Set up "lower container", which contains piece and score count.
+		tracker2LowerPanel.setLayout(new BoxLayout(tracker2LowerPanel, BoxLayout.X_AXIS));
+		tracker2LowerPanel.setBackground( new Color(0, 0, 0, 0) );
+		tracker2Piece = loadImage("images/jThello-piece-white.png");
+		tracker2Score.setFont(window.fontTexBold.deriveFont(20f));
+		tracker2Score.setForeground(Color.WHITE);
+		tracker2LowerPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+		tracker2LowerPanel.add(tracker2Piece);
+		tracker2LowerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+		tracker2LowerPanel.add(tracker2Score);
+		tracker2LowerPanel.add(Box.createHorizontalGlue());
+
+		// Combine all elements to create final score panel.
+		rightScoreP2.add(tracker2Panel);
+		rightScoreP2.add(Box.createRigidArea(new Dimension(0, 5)));
+		rightScoreP2.add(tracker2LowerPanel);
+		rightScoreP2.add(Box.createRigidArea(new Dimension(0, 15)));
+
+		// -- STATUS BOX (displays status to player)
+
+		// Set up primary container.
+		rightStatus.setLayout(new BoxLayout(rightStatus, BoxLayout.Y_AXIS));
+		rightStatus.setBackground(Color.RED);
+
+		// Set up "upper container", which contains the "status" label".
+		JPanel rightStatusUpper = new JPanel();
+		rightStatusUpper.setLayout(new BoxLayout(rightStatusUpper, BoxLayout.X_AXIS));
+		rightStatusUpper.setBackground( new Color(0, 0, 0, 0) );
+		JLabel rightStatusName = new JLabel("GAME STATUS");
+		rightStatusName.setFont(window.fontTexBold.deriveFont(18f));
+		rightStatusName.setForeground(Color.WHITE);
+		rightStatusUpper.add(Box.createRigidArea(new Dimension(20, 0)));
+		rightStatusUpper.add(rightStatusName);
+		rightStatusUpper.add(Box.createHorizontalGlue());
+
+		// Set up "lower container", which contains the actual status message.
+		JPanel rightStatusLower = new JPanel();
+		rightStatusLower.setLayout(new BoxLayout(rightStatusLower, BoxLayout.X_AXIS));
+		rightStatusLower.setBackground( new Color(0, 0, 0, 0) );
+		JLabel rightStatusActual = new JLabel("Invalid move. Please retry...");
+		rightStatusActual.setFont(window.fontTexBold.deriveFont(12f));
+		rightStatusActual.setForeground(Color.WHITE);
+		rightStatusLower.add(Box.createRigidArea(new Dimension(20, 0)));
+		rightStatusLower.add(rightStatusActual);
+		rightStatusLower.add(Box.createHorizontalGlue());
+
+		// Combine all elements to create final score panel.
+		rightStatus.add(Box.createRigidArea(new Dimension(0, 7)));
+		rightStatus.add(rightStatusUpper);
+		rightStatus.add(Box.createRigidArea(new Dimension(0, 5)));
+		rightStatus.add(rightStatusLower);
+		rightStatus.add(Box.createRigidArea(new Dimension(0, 15)));
+
+		// -- INVISIBLE BLOCK (set up container min width)
 		rightInvisibleBlock.add(Box.createRigidArea(new Dimension(250, 0)));
 
 		// Add to right side, then to upper half.
@@ -358,6 +446,9 @@ public class GameViewModel implements ModelInterface {
 		rightSide.add(rightTurnP);
 		rightSide.add(Box.createRigidArea(new Dimension(0, 20)));
 		rightSide.add(rightScoreP1);
+		rightSide.add(rightScoreP2);
+		rightSide.add(Box.createRigidArea(new Dimension(0, 20)));
+		rightSide.add(rightStatus);
 		rightSide.add(rightInvisibleBlock);
 
 		upperHalf.add(rightSide, BorderLayout.EAST);

@@ -1,5 +1,7 @@
 package jThello;
 
+import java.awt.*;
+
 public class GameController {
 
 	public void initializeEventHandlers(GameViewModel gameViewModel, MainWindow window) {
@@ -17,14 +19,22 @@ public class GameController {
 	}
 
 	// Sets the current active player in the GUI based on the given input.
-	// Essentially recolors the track/score elements and changes colors.
-	public void setCurrentPlayer(int player) {
+	// Essentially recolors the track/score elements and changes colors, and displays given string.
+	// Keep string to under about 15 characters to prevent visual bugs.
+	public void setCurrentPlayer(int player, String input) {
 
 	}
 
 	// Update scores on GUI.
 	public void updateScores(int player1Score, int player2Score) {
 
+	}
+
+	// Set status of engine, visible to player.
+	// Includes: Bad input, waiting for input, processing move, thinking...
+	// Color sets color of label background, so an error would get Color.RED, for example.
+	public void setStatus(String status, Color statusColor) {
+		
 	}
 
 	// Updates the entire board GUI using gamestate of board.
