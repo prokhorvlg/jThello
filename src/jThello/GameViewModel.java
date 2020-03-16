@@ -14,6 +14,7 @@ import javax.swing.border.Border;
 public class GameViewModel implements ModelInterface {
 	
 	GameController gameController;
+	private boolean vsAI;
 
 	BackgroundPanel gameView;
 	
@@ -91,9 +92,10 @@ public class GameViewModel implements ModelInterface {
 	JButton rulesButton = new JButton("Rules");
 	JButton resignButton = new JButton("Resign");
 	
-	GameViewModel() throws IOException {
+	GameViewModel(boolean _vsAI) throws IOException {
 		gameController = new GameController();
 		gameView = new BackgroundPanel(ImageIO.read(new File("images/bg.png")), BackgroundPanel.TILED, 0.0f, 0.0f);
+		vsAI = _vsAI;
 	}
 	
 	// Loads image from given path into a label return object.

@@ -2,6 +2,7 @@ package jThello;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MainMenuController {
 	
@@ -19,13 +20,25 @@ public class MainMenuController {
 	
 	private class newGameAIButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			window.openView(window.gameViewModel);
+			try {
+				window.setPlayerNameViewModel = new SetPlayerNameViewModel(1);
+				window.setPlayerNameViewModel.initializePanel(window);
+				window.openView(window.setPlayerNameViewModel);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 	
 	private class newGamePlayerButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			window.openView(window.gameViewModel);
+			try {
+				window.setPlayerNameViewModel = new SetPlayerNameViewModel(2);
+				window.setPlayerNameViewModel.initializePanel(window);
+				window.openView(window.setPlayerNameViewModel);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 	

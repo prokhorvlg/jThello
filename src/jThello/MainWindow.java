@@ -14,6 +14,7 @@ public class MainWindow extends JFrame {
 	public ModelInterface mainMenuModel;
 	public ModelInterface aboutViewModel;
 	public ModelInterface gameViewModel;
+	public ModelInterface setPlayerNameViewModel;
 	public ModelInterface highScoresModel;
 	public ModelInterface rulesModel;
 
@@ -36,7 +37,6 @@ public class MainWindow extends JFrame {
 
 		mainMenuModel = new MainMenuModel();
 		aboutViewModel = new AboutViewModel();
-		gameViewModel = new GameViewModel();
 		highScoresModel = new HighScoresViewModel();
 		rulesModel = new RulesViewModel();
 		
@@ -66,7 +66,6 @@ public class MainWindow extends JFrame {
 	private void initializePanels() throws IOException {
 		mainMenuModel.initializePanel(this);
 		aboutViewModel.initializePanel(this);
-		gameViewModel.initializePanel(this);
 		highScoresModel.initializePanel(this);
 		rulesModel.initializePanel(this);
 	}
