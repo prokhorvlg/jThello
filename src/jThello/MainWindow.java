@@ -1,7 +1,10 @@
 package jThello;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
-import javax.swing.JFrame;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class MainWindow extends JFrame {
 	
@@ -13,9 +16,24 @@ public class MainWindow extends JFrame {
 	public ModelInterface gameViewModel;
 	public ModelInterface highScoresModel;
 	public ModelInterface rulesModel;
-	
+
+	// Universally-used fonts and typographical settings.
+	public File fontTexBoldFile;
+	public Font fontTexBold;
+
+	public Color ColorPrimary;
+	public Color ColorHighlight;
+
 	// Initialize the window at start of program.
-	public MainWindow() throws IOException {
+	public MainWindow() throws IOException, FontFormatException {
+
+		// Initialize typographical constants.
+		fontTexBoldFile = new File("fonts/texgyreadventor-bold.ttf");
+		fontTexBold = Font.createFont(Font.TRUETYPE_FONT, fontTexBoldFile);
+
+		ColorPrimary = Color.white;
+		ColorHighlight = Color.decode("#22d064");
+
 		mainMenuModel = new MainMenuModel();
 		aboutViewModel = new AboutViewModel();
 		gameViewModel = new GameViewModel();
@@ -46,6 +64,7 @@ public class MainWindow extends JFrame {
 	
 	// Initializes all of the views with elements, content, and event listeners.
 	private void initializePanels() throws IOException {
+
 		mainMenuModel.initializePanel(this);
 		aboutViewModel.initializePanel(this);
 		gameViewModel.initializePanel(this);
@@ -55,7 +74,7 @@ public class MainWindow extends JFrame {
 	
 	public void Display() {
 		this.pack();
-		this.setSize(550,525);
+		this.setSize(1200,700);
 	}
 	
 	// GAME VIEW FRONT END

@@ -1,27 +1,21 @@
 package jThello;
 
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import Libraries.BackgroundPanel;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+import javax.swing.border.Border;
 
 public class GameViewModel implements ModelInterface {
 	
 	GameController gameController;
-	
-	JPanel gameView;
+
+	BackgroundPanel gameView;
 	
 	// 1. Upper half
 	
@@ -55,7 +49,7 @@ public class GameViewModel implements ModelInterface {
 	// 7 o o o o o o o o x
 	// 8 o o o o o o o o x
 	
-	JLabel[][] boardPieces = new JLabel[20][20];
+	JPanel[][] boardPieces = new JPanel[20][20];
 	
 	JPanel[] boardRows = new JPanel[9];
 	
@@ -92,9 +86,9 @@ public class GameViewModel implements ModelInterface {
 	JButton rulesButton = new JButton("Rules");
 	JButton resignButton = new JButton("Resign");
 	
-	GameViewModel() {
+	GameViewModel() throws IOException {
 		gameController = new GameController();
-		gameView = new JPanel();
+		gameView = new BackgroundPanel(ImageIO.read(new File("images/bg.png")), BackgroundPanel.TILED, 0.0f, 0.0f);
 	}
 	
 	// Loads image from given path into a label return object.
@@ -104,7 +98,16 @@ public class GameViewModel implements ModelInterface {
 	}
 	
 	private void initializeBoardRow(JPanel init) {
-		init.setLayout(new GridLayout(0, 9, 30, 5));
+		init.setLayout(new GridLayout(0, 10, 0, 0));
+		init.setBackground( new Color(0, 0, 0, 0) );
+		//init.setLayout(new BoxLayout(init, BoxLayout.X_AXIS));
+	}
+
+	private JPanel boardEmptySpace() {
+		JPanel emptySpace = new JPanel();
+		emptySpace.add(Box.createRigidArea(new Dimension(0, 0)));
+		emptySpace.setBackground(new Color(0, 0, 0, 0));
+		return emptySpace;
 	}
 
 	public void initializePanel(MainWindow window) throws IOException {
@@ -114,26 +117,55 @@ public class GameViewModel implements ModelInterface {
 		
 		leftSide = new JPanel();
 		leftSide.setLayout(new BoxLayout(leftSide, BoxLayout.Y_AXIS));
+		leftSide.setBackground( new Color(0, 0, 0, 0) );
+
+		JPanel leftLogoP = new JPanel();
+		JPanel leftTitleP = new JPanel();
+		JPanel leftSubP = new JPanel();
+		JPanel leftInvisibleBlock = new JPanel();
+
+		leftLogoP.setBackground( new Color(0, 0, 0, 0) );
+		leftTitleP.setBackground( new Color(0, 0, 0, 0) );
+		leftSubP.setBackground( new Color(0, 0, 0, 0) );
+		leftInvisibleBlock.setBackground( new Color(0, 0, 0, 0) );
 		
 		// -- LOGO
-		mainLogo = loadImage("images/placeholder.png");
-		leftSide.add(mainLogo);
-		
+		mainLogo = loadImage("images/jThello_logo.png");
+		leftLogoP.setLayout(new BoxLayout(leftLogoP, BoxLayout.X_AXIS));
+		leftLogoP.add(Box.createHorizontalGlue());
+		leftLogoP.add(mainLogo);
+		leftLogoP.add(Box.createHorizontalGlue());
+
 		// -- LABEL
-		Box box = new Box(BoxLayout.Y_AXIS);
-		//mainLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-		
-		box.add( Box.createHorizontalGlue() );
-		//box.add(mainLabel);
-		box.add( Box.createHorizontalGlue() );
-		
-		leftSide.add(mainLabel);
+
+		leftTitleP.setLayout(new BoxLayout(leftTitleP, BoxLayout.X_AXIS));
+		leftTitleP.add(Box.createHorizontalGlue());
+		mainLabel.setFont(window.fontTexBold.deriveFont(60f));
+		mainLabel.setForeground(window.ColorPrimary);
+		leftTitleP.add(mainLabel);
+		leftTitleP.add(Box.createHorizontalGlue());
+
+		leftSubP.setLayout(new BoxLayout(leftSubP, BoxLayout.X_AXIS));
+		leftSubP.add(Box.createHorizontalGlue());
+		JLabel subLabel = new JLabel("A classic board game.");
+		subLabel.setFont(window.fontTexBold.deriveFont(14f));
+		subLabel.setForeground(window.ColorHighlight);
+		leftSubP.add(subLabel);
+		leftSubP.add(Box.createHorizontalGlue());
+
+		leftInvisibleBlock.add(Box.createRigidArea(new Dimension(250, 0)));
+
+		leftSide.add(leftLogoP);
+		leftSide.add(leftTitleP);
+		leftSide.add(leftSubP);
+		leftSide.add(leftInvisibleBlock);
 		
 		upperHalf.add(leftSide, BorderLayout.WEST);
 		
 		// - GAME BOARD
 		gameBoard = new JPanel();
 		gameBoard.setLayout(new BoxLayout(gameBoard, BoxLayout.Y_AXIS));
+		gameBoard.setBackground( new Color(0, 0, 0, 0) );
 		
 		String[] coordsX = {"A", "B", "C", "D", "E", "F", "G", "H"};
 		String[] coordsY = {"1", "2", "3", "4", "5", "6", "7", "8"};
@@ -148,15 +180,44 @@ public class GameViewModel implements ModelInterface {
 				
 				// For each piece in the first row...
 				for (int y = 0; y < 10; y++) {
-					System.out.println("ay" + i + y);
 					if (y == 0) {
-						// First piece is an empty.
-						boardPieces[i][y] = new JLabel();
+						// First piece is a special empty which contains a board corner point.
+						JPanel cornerPanel = new JPanel();
+						cornerPanel.setLayout(new BorderLayout());
+						cornerPanel.setBackground( new Color(0, 0, 0, 0) );
+
+						cornerPanel.add(loadImage("images/jThello-board-corner.png"), BorderLayout.SOUTH);
+
+						boardPieces[i][y] = cornerPanel;
 					} else if (y == 9) {
-						boardPieces[i][y] = new JLabel();
+						boardPieces[i][y] = boardEmptySpace();
 					} else {
 						// Set some default parameters.
-						boardPieces[i][y] = new JLabel(coordsX[y-1]);
+						JPanel numCoordPanel = new JPanel();
+						numCoordPanel.setLayout(new BorderLayout());
+						numCoordPanel.setBackground( new Color(0, 0, 0, 0) );
+
+						JPanel coordP = new JPanel();
+						coordP.setLayout(new BoxLayout(coordP, BoxLayout.X_AXIS));
+						coordP.setBackground( new Color(0, 0, 0, 0) );
+
+						coordP.add(Box.createHorizontalGlue());
+						JLabel coordLabel = new JLabel("<html><span style='padding: 2px; text-align: center;'>" + coordsX[y-1] + "</span></html>", SwingConstants.CENTER);
+						coordLabel.setFont(window.fontTexBold.deriveFont(14f));
+						coordLabel.setForeground(window.ColorHighlight);
+						coordP.add(coordLabel);
+						coordP.add(Box.createHorizontalGlue());
+
+						JPanel horizP = new JPanel();
+						horizP.setLayout(new BorderLayout());
+						horizP.add(loadImage("images/jThello-horiz.png"), BorderLayout.CENTER);
+						horizP.setBackground( new Color(0, 0, 0, 0) );
+
+						numCoordPanel.add(coordP, BorderLayout.NORTH);
+						numCoordPanel.add(Box.createRigidArea(new Dimension(0, 18)), BorderLayout.CENTER);
+						numCoordPanel.add(horizP, BorderLayout.SOUTH);
+
+						boardPieces[i][y] = numCoordPanel;
 					}
 					
 					// Add this piece to this row.
@@ -176,12 +237,61 @@ public class GameViewModel implements ModelInterface {
 				for (int y = 0; y < 10; y++) {
 					if (y == 0) {
 						// First piece is a number coordinate.
-						boardPieces[i][y] = new JLabel(coordsY[i-1]);
+						JPanel numCoordPanel = new JPanel();
+						numCoordPanel.setLayout(new BorderLayout());
+						numCoordPanel.setBackground( new Color(0, 0, 0, 0) );
+
+						JPanel coordP = new JPanel();
+						coordP.setLayout(new BoxLayout(coordP, BoxLayout.Y_AXIS));
+						coordP.setBackground( new Color(0, 0, 0, 0) );
+
+						coordP.add(Box.createVerticalGlue());
+						JLabel coordLabel = new JLabel("<html><span style='padding: 20px;'>" + coordsY[i-1] + "</span></html>");
+						coordLabel.setFont(window.fontTexBold.deriveFont(14f));
+						coordLabel.setForeground(window.ColorHighlight);
+						coordP.add(coordLabel);
+						coordP.add(Box.createVerticalGlue());
+
+						JPanel horizP = new JPanel();
+						horizP.setLayout(new BorderLayout());
+						horizP.add(loadImage("images/jThello-vert.png"), BorderLayout.CENTER);
+						horizP.setBackground( new Color(0, 0, 0, 0) );
+
+						numCoordPanel.add(coordP, BorderLayout.CENTER);
+						numCoordPanel.add(horizP, BorderLayout.EAST);
+
+						boardPieces[i][y] = numCoordPanel;
+
 					} else if (y == 9) {
-						boardPieces[i][y] = new JLabel();
+						boardPieces[i][y] = boardEmptySpace();
 					} else {
-						// Set some default parameters.
-						boardPieces[i][y] = new JLabel("O");
+						JPanel piecePanel = new JPanel();
+						piecePanel.setLayout(new BorderLayout());
+						//piecePanel.setBackground( new Color(0, 0, 0, 0) );
+						piecePanel.setBackground( new Color(34, 208, 100, 150) );
+
+						JPanel pieceP = new JPanel();
+						pieceP.setLayout(new BoxLayout(pieceP, BoxLayout.X_AXIS));
+						pieceP.setBackground( new Color(0, 0, 0, 0) );
+						pieceP.add(Box.createHorizontalGlue());
+						pieceP.add(loadImage("images/jThello-piece-black.png"));
+						pieceP.add(Box.createHorizontalGlue());
+
+						JPanel vertP = new JPanel();
+						vertP.setLayout(new BorderLayout());
+						vertP.add(loadImage("images/jThello-vert-short.png"), BorderLayout.CENTER);
+						vertP.setBackground( new Color(0, 0, 0, 0) );
+
+						JPanel horizP = new JPanel();
+						horizP.setLayout(new BorderLayout());
+						horizP.add(loadImage("images/jThello-horiz.png"), BorderLayout.CENTER);
+						horizP.setBackground( new Color(0, 0, 0, 0) );
+
+						piecePanel.add(pieceP, BorderLayout.CENTER);
+						piecePanel.add(vertP, BorderLayout.EAST);
+						piecePanel.add(horizP, BorderLayout.SOUTH);
+
+						boardPieces[i][y] = piecePanel;
 					}
 					
 					// Add this piece to this row.
@@ -195,12 +305,97 @@ public class GameViewModel implements ModelInterface {
 		
 		upperHalf.add(gameBoard, BorderLayout.CENTER);
 		
-		
-		
+		// Right side
+
+		rightSide = new JPanel();
+		rightSide.setLayout(new BoxLayout(rightSide, BoxLayout.Y_AXIS));
+		rightSide.setBackground( new Color(0, 0, 0, 0) );
+
+		JPanel rightTurnP = new JPanel();
+		JPanel rightScoreP1 = new JPanel();
+		JPanel rightInvisibleBlock = new JPanel();
+
+		rightTurnP.setBackground( new Color(0, 0, 0, 0) );
+		rightScoreP1.setBackground( new Color(0, 0, 0, 0) );
+		rightInvisibleBlock.setBackground( new Color(0, 0, 0, 0) );
+
+		// -- TURN (label which displays who's turn it is)
+
+		rightTurnP.setLayout(new BoxLayout(rightTurnP, BoxLayout.X_AXIS));
+		rightTurnP.add(Box.createHorizontalGlue());
+
+		JPanel rightTurnPInner = new JPanel();
+		rightTurnPInner.setLayout(new BoxLayout(rightTurnPInner, BoxLayout.X_AXIS));
+		rightTurnPInner.add(Box.createRigidArea(new Dimension(20, 0)));
+		turnTracker.setFont(window.fontTexBold.deriveFont(30f));
+		turnTracker.setForeground(window.ColorPrimary);
+		rightTurnPInner.add(turnTracker);
+		rightTurnPInner.add(Box.createRigidArea(new Dimension(20, 0)));
+		rightTurnPInner.setBackground(Color.BLACK);
+		rightTurnP.add(rightTurnPInner);
+
+		rightTurnP.add(Box.createHorizontalGlue());
+
+		// -- SCORE
+
+		rightScoreP1.setLayout(new BoxLayout(rightScoreP1, BoxLayout.Y_AXIS));
+
+		tracker1Panel.setLayout(new BoxLayout(tracker1Panel, BoxLayout.X_AXIS));
+		tracker1Panel.add(tracker1Name);
+		tracker1Panel.add(Box.createHorizontalGlue());
+		tracker1LowerPanel.setLayout(new BoxLayout(tracker1LowerPanel, BoxLayout.X_AXIS));
+		tracker1LowerPanel.add(tracker1Piece);
+		tracker1LowerPanel.add(tracker1Score);
+		tracker1Panel.add(Box.createHorizontalGlue());
+
+		rightScoreP1.add(tracker1Panel);
+		rightScoreP1.add(tracker1LowerPanel);
+
+		rightInvisibleBlock.add(Box.createRigidArea(new Dimension(250, 0)));
+
+		// Add to right side, then to upper half.
+
+		rightSide.add(rightTurnP);
+		rightSide.add(Box.createRigidArea(new Dimension(0, 20)));
+		rightSide.add(rightScoreP1);
+		rightSide.add(rightInvisibleBlock);
+
 		upperHalf.add(rightSide, BorderLayout.EAST);
-		
+
+		// LOWER HALF (the two buttons)
+
+		lowerHalf.setLayout(new BoxLayout(lowerHalf, BoxLayout.Y_AXIS));
+
+		JPanel lowerHalfUpperC = new JPanel();
+		JPanel lowerHalfInnerC = new JPanel();
+		JPanel lowerHalfLowerC = new JPanel();
+
+		lowerHalfUpperC.add(Box.createRigidArea(new Dimension(0, 5)));
+
+		lowerHalfInnerC.setLayout(new BoxLayout(lowerHalfInnerC, BoxLayout.X_AXIS));
+		lowerHalfInnerC.add(Box.createHorizontalGlue());
+		lowerHalfInnerC.add(rulesButton);
+		lowerHalfInnerC.add(Box.createRigidArea(new Dimension(10, 0)));
+		lowerHalfInnerC.add(resignButton);
+		lowerHalfInnerC.add(Box.createRigidArea(new Dimension(15, 0)));
+
+		lowerHalfLowerC.add(Box.createRigidArea(new Dimension(0, 5)));
+
+		lowerHalf.add(lowerHalfUpperC);
+		lowerHalf.add(lowerHalfInnerC);
+		lowerHalf.add(lowerHalfLowerC);
+
+		// Add primary panels to window
+
 		gameView.setLayout(new BorderLayout());
-		gameView.add(upperHalf, BorderLayout.NORTH);
+
+		// Empty top for spacing.
+
+		JPanel northEmpty = new JPanel();
+		northEmpty.add(Box.createRigidArea(new Dimension(100, 50)));
+		gameView.add(northEmpty, BorderLayout.NORTH);
+
+		gameView.add(upperHalf, BorderLayout.CENTER);
 		gameView.add(lowerHalf, BorderLayout.SOUTH);
 		
 	    // Add event listeners to buttons.
