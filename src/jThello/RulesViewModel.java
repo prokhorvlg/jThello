@@ -14,7 +14,6 @@ public class RulesViewModel implements ModelInterface {
 	private JLabel jlabel;
 	
 	private JEditorPane contentPane;
-	public JScrollPane contentPanel;
 	
 	public JPanel backButtonPanel;
 	public JButton backButton;
