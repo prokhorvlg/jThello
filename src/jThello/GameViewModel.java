@@ -50,16 +50,21 @@ public class GameViewModel implements ModelInterface {
 	// 8 o o o o o o o o x
 	
 	JPanel[][] boardPieces = new JPanel[20][20];
-	
 	JPanel[] boardRows = new JPanel[9];
+
+	JLabel[][] boardIcons = new JLabel[8][8];
+	ImageIcon[] boardIconsRaw = new ImageIcon[3];
 	
 	// 1.3 Right side (score trackers, turn tracker)
 	
 	JPanel rightSide = new JPanel();
+	public JPanel rightStatus;
+	public JLabel rightStatusActual;
 	
 	// 1.3.1 Turn Tracker (Your turn, their turn)
 	
 	JLabel turnTracker = new JLabel("YOUR TURN");
+	public JPanel rightTurnPInner;
 	
 	// 1.3.2 Score Trackers
 		
@@ -68,14 +73,14 @@ public class GameViewModel implements ModelInterface {
 	
 	JPanel tracker1LowerPanel = new JPanel();
 	JLabel tracker1Piece = new JLabel("O");
-	JLabel tracker1Score = new JLabel("x NUM");
+	public JLabel tracker1Score = new JLabel("x NUM");
 	
 	JPanel tracker2Panel = new JPanel();
 	JLabel tracker2Name = new JLabel("P2");
 	
 	JPanel tracker2LowerPanel = new JPanel();
 	JLabel tracker2Piece = new JLabel("O");
-	JLabel tracker2Score = new JLabel("x NUM");
+	public JLabel tracker2Score = new JLabel("x NUM");
 	
 	// 2. Lower half
 	
@@ -96,6 +101,11 @@ public class GameViewModel implements ModelInterface {
 		BufferedImage myPicture = ImageIO.read(new File(filePath));
 		return new JLabel(new ImageIcon(myPicture));
 	}
+
+	public ImageIcon loadImageRaw(String filePath) throws IOException {
+		BufferedImage myPicture = ImageIO.read(new File(filePath));
+		return new ImageIcon(myPicture);
+	}
 	
 	private void initializeBoardRow(JPanel init) {
 		init.setLayout(new GridLayout(0, 10, 0, 0));
@@ -110,7 +120,18 @@ public class GameViewModel implements ModelInterface {
 		return emptySpace;
 	}
 
+	// Returns a piece icon label with appropriate image attached.
+	public ImageIcon loadPieceImage(int pieceCode) {
+		return boardIconsRaw[pieceCode+1];
+	}
+
 	public void initializePanel(MainWindow window) throws IOException {
+		boardIconsRaw = new ImageIcon[]{
+				loadImageRaw("images/jThello-piece-blank.png"),
+				loadImageRaw("images/jThello-piece-black.png"),
+				loadImageRaw("images/jThello-piece-white.png")
+		};
+
 		// Add elements to screen.
 		
 		// - LEFT SIDE
@@ -268,13 +289,15 @@ public class GameViewModel implements ModelInterface {
 						JPanel piecePanel = new JPanel();
 						piecePanel.setLayout(new BorderLayout());
 						//piecePanel.setBackground( new Color(0, 0, 0, 0) );
-						piecePanel.setBackground( new Color(34, 208, 100, 150) );
+						piecePanel.setBackground( new Color(39, 141, 77, 255) );
 
 						JPanel pieceP = new JPanel();
 						pieceP.setLayout(new BoxLayout(pieceP, BoxLayout.X_AXIS));
 						pieceP.setBackground( new Color(0, 0, 0, 0) );
 						pieceP.add(Box.createHorizontalGlue());
-						pieceP.add(loadImage("images/jThello-piece-black.png"));
+						JLabel myPiece = new JLabel(loadPieceImage(1));
+						boardIcons[i-1][y-1] = myPiece;
+						pieceP.add(boardIcons[i-1][y-1]);
 						pieceP.add(Box.createHorizontalGlue());
 
 						JPanel vertP = new JPanel();
@@ -314,7 +337,7 @@ public class GameViewModel implements ModelInterface {
 		JPanel rightTurnP = new JPanel();
 		JPanel rightScoreP1 = new JPanel();
 		JPanel rightScoreP2 = new JPanel();
-		JPanel rightStatus = new JPanel();
+		rightStatus = new JPanel();
 		JPanel rightInvisibleBlock = new JPanel();
 
 		rightTurnP.setBackground( new Color(0, 0, 0, 0) );
@@ -325,7 +348,7 @@ public class GameViewModel implements ModelInterface {
 		rightTurnP.setLayout(new BoxLayout(rightTurnP, BoxLayout.X_AXIS));
 		rightTurnP.add(Box.createHorizontalGlue());
 
-		JPanel rightTurnPInner = new JPanel();
+		rightTurnPInner = new JPanel();
 		rightTurnPInner.setLayout(new BoxLayout(rightTurnPInner, BoxLayout.X_AXIS));
 		rightTurnPInner.add(Box.createRigidArea(new Dimension(20, 0)));
 		turnTracker.setFont(window.fontTexBold.deriveFont(30f));
@@ -355,7 +378,7 @@ public class GameViewModel implements ModelInterface {
 		// Set up "lower container", which contains piece and score count.
 		tracker1LowerPanel.setLayout(new BoxLayout(tracker1LowerPanel, BoxLayout.X_AXIS));
 		tracker1LowerPanel.setBackground( new Color(0, 0, 0, 0) );
-		tracker1Piece = loadImage("images/jThello-piece-black.png");
+		tracker1Piece = loadImage("images/jThello-piece-black-nobg.png");
 		tracker1Score.setFont(window.fontTexBold.deriveFont(20f));
 		tracker1Score.setForeground(Color.BLACK);
 		tracker1LowerPanel.add(Box.createRigidArea(new Dimension(20, 0)));
@@ -388,7 +411,7 @@ public class GameViewModel implements ModelInterface {
 		// Set up "lower container", which contains piece and score count.
 		tracker2LowerPanel.setLayout(new BoxLayout(tracker2LowerPanel, BoxLayout.X_AXIS));
 		tracker2LowerPanel.setBackground( new Color(0, 0, 0, 0) );
-		tracker2Piece = loadImage("images/jThello-piece-white.png");
+		tracker2Piece = loadImage("images/jThello-piece-white-nobg.png");
 		tracker2Score.setFont(window.fontTexBold.deriveFont(20f));
 		tracker2Score.setForeground(Color.WHITE);
 		tracker2LowerPanel.add(Box.createRigidArea(new Dimension(20, 0)));
@@ -424,7 +447,7 @@ public class GameViewModel implements ModelInterface {
 		JPanel rightStatusLower = new JPanel();
 		rightStatusLower.setLayout(new BoxLayout(rightStatusLower, BoxLayout.X_AXIS));
 		rightStatusLower.setBackground( new Color(0, 0, 0, 0) );
-		JLabel rightStatusActual = new JLabel("Invalid move. Please retry...");
+		rightStatusActual = new JLabel("Script loading.");
 		rightStatusActual.setFont(window.fontTexBold.deriveFont(12f));
 		rightStatusActual.setForeground(Color.WHITE);
 		rightStatusLower.add(Box.createRigidArea(new Dimension(20, 0)));
@@ -491,6 +514,13 @@ public class GameViewModel implements ModelInterface {
 		
 	    // Add event listeners to buttons.
 	    gameController.initializeEventHandlers(this, window);
+
+	    // Initialize default states for all board elements.
+		gameController.resetBoard();
+		gameController.setStatus("Loading game...", Color.BLACK);
+		gameController.updateScores(0,0);
+		gameController.initializePlayers("Alice", "Bob");
+		gameController.setCurrentPlayer(0, "Alice's Turn");
 	}
 
 	public JPanel getModel() {

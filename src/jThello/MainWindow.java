@@ -64,7 +64,6 @@ public class MainWindow extends JFrame {
 	
 	// Initializes all of the views with elements, content, and event listeners.
 	private void initializePanels() throws IOException {
-
 		mainMenuModel.initializePanel(this);
 		aboutViewModel.initializePanel(this);
 		gameViewModel.initializePanel(this);
