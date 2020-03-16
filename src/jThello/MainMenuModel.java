@@ -32,41 +32,18 @@ public class MainMenuModel implements ModelInterface {
 		mainMenuController = new MainMenuController();
 		mainMenuView = new BackgroundPanel(ImageIO.read(new File("images/bg.png")), BackgroundPanel.TILED, 0.0f, 0.0f);
 	}
-
-	private CustomButton initMenuButton(String text) {
-		CustomButton menuButton = new CustomButton(text, buttonImage.getImage());
-		menuButton.setLayout(new BorderLayout());
-
-		JPanel centerMenuButton = new JPanel();
-		centerMenuButton.setLayout(new BoxLayout(centerMenuButton, BoxLayout.X_AXIS));
-		centerMenuButton.setBackground( new Color(0, 0, 0, 0) );
-
-		JLabel menuButtonText = new JLabel(text);
-		menuButtonText.setForeground(Color.decode("#22d064"));
-		menuButtonText.setFont(fontTexBold.deriveFont(14f));
-		centerMenuButton.add(Box.createHorizontalGlue());
-		centerMenuButton.add(menuButtonText);
-		centerMenuButton.add(Box.createHorizontalGlue());
-
-		menuButton.add(Box.createRigidArea(new Dimension(0, 8)), BorderLayout.NORTH);
-		menuButton.add(centerMenuButton, BorderLayout.CENTER);
-		menuButton.add(Box.createRigidArea(new Dimension(0, 8)), BorderLayout.SOUTH);
-
-		return menuButton;
-	}
 	
 	@Override
 	public void initializePanel(MainWindow window) throws IOException {
 
 		fontTexBold = window.fontTexBold;
-		buttonImage = window.loadImageRaw("images/button-unclicked.png");
 
-		newGameAIButton = initMenuButton("New Game vs AI");
-		newGamePlayerButton = initMenuButton("New Game vs Player");
-		highScoresButton = initMenuButton("High Scores");
-		rulesButton = initMenuButton("Rules");
-		aboutButton = initMenuButton("About");
-		exitButton = initMenuButton("Exit");
+		newGameAIButton = window.initMenuButton("New Game vs AI", "main");
+		newGamePlayerButton = window.initMenuButton("New Game vs Player", "main");
+		highScoresButton = window.initMenuButton("High Scores", "main");
+		rulesButton = window.initMenuButton("Rules", "main");
+		aboutButton = window.initMenuButton("About", "main");
+		exitButton = window.initMenuButton("Exit", "main");
 
 		JPanel fullMainMenuContainer = new JPanel();
 		fullMainMenuContainer.setLayout(new BoxLayout(fullMainMenuContainer, BoxLayout.X_AXIS));

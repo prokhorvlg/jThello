@@ -14,21 +14,39 @@ import java.util.Vector;
 public class CustomButton extends JPanel implements MouseListener {
 
         String title = null;
-        Image image = null;
+        String type = null;
         private Vector<ActionListener> listeners = null;
         boolean hit = false;
         boolean hover = false;
 
-        public CustomButton (String title, Image image){
+        Dimension buttonSize = null;
+
+        public CustomButton (String title, String type) {
             super();
             this.title = title;
-            this.image = image;
+            this.type = type;
             listeners = new Vector<>();
             addMouseListener(this);
+
+            if (type.equals("main")) {
+                buttonSize = new Dimension(300,40);
+            } else if (type.equals("bottom")) {
+                buttonSize = new Dimension(200,40);
+            } else {
+                buttonSize = new Dimension(200,40);
+            }
+        }
+
+        public Dimension getMinimumSize(){
+            return buttonSize;
+        }
+
+        public Dimension getPreferredSize(){
+            return buttonSize;
         }
 
         public Dimension getMaximumSize(){
-            return new Dimension(300,150);
+            return buttonSize;
         }
 
         public void paintComponent(Graphics g) {

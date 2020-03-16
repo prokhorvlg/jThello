@@ -1,6 +1,7 @@
 package jThello;
 
 import Libraries.BackgroundPanel;
+import Libraries.CustomButton;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -89,8 +90,8 @@ public class GameViewModel implements ModelInterface {
 	
 	// 2.1 Button Container
 	
-	JButton rulesButton = new JButton("Rules");
-	JButton resignButton = new JButton("Resign");
+	CustomButton rulesButton;
+	CustomButton resignButton;
 	
 	GameViewModel(boolean _vsAI) throws IOException {
 		gameController = new GameController();
@@ -470,12 +471,20 @@ public class GameViewModel implements ModelInterface {
 		// LOWER HALF (the two buttons)
 
 		lowerHalf.setLayout(new BoxLayout(lowerHalf, BoxLayout.Y_AXIS));
+		lowerHalf.setBackground( new Color(0, 0, 0, 0) );
 
 		JPanel lowerHalfUpperC = new JPanel();
 		JPanel lowerHalfInnerC = new JPanel();
 		JPanel lowerHalfLowerC = new JPanel();
 
+		lowerHalfUpperC.setBackground( new Color(0, 0, 0, 0) );
+		lowerHalfInnerC.setBackground( new Color(0, 0, 0, 0) );
+		lowerHalfLowerC.setBackground( new Color(0, 0, 0, 0) );
+
 		lowerHalfUpperC.add(Box.createRigidArea(new Dimension(0, 5)));
+
+		rulesButton = window.initMenuButton("View Rules", "bottom");
+		resignButton = window.initMenuButton("Resign", "bottom");
 
 		lowerHalfInnerC.setLayout(new BoxLayout(lowerHalfInnerC, BoxLayout.X_AXIS));
 		lowerHalfInnerC.add(Box.createHorizontalGlue());

@@ -1,5 +1,7 @@
 package jThello;
 
+import Libraries.CustomButton;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -86,6 +88,29 @@ public class MainWindow extends JFrame {
 	public ImageIcon loadImageRaw(String filePath) throws IOException {
 		BufferedImage myPicture = ImageIO.read(new File(filePath));
 		return new ImageIcon(myPicture);
+	}
+
+	// Returns a custom button object with the appropriate label.
+	public CustomButton initMenuButton(String text, String type) {
+		CustomButton menuButton = new CustomButton(text, type);
+		menuButton.setLayout(new BorderLayout());
+
+		JPanel centerMenuButton = new JPanel();
+		centerMenuButton.setLayout(new BoxLayout(centerMenuButton, BoxLayout.X_AXIS));
+		centerMenuButton.setBackground( new Color(0, 0, 0, 0) );
+
+		JLabel menuButtonText = new JLabel(text);
+		menuButtonText.setForeground(Color.decode("#22d064"));
+		menuButtonText.setFont(fontTexBold.deriveFont(14f));
+		centerMenuButton.add(Box.createHorizontalGlue());
+		centerMenuButton.add(menuButtonText);
+		centerMenuButton.add(Box.createHorizontalGlue());
+
+		menuButton.add(Box.createRigidArea(new Dimension(0, 8)), BorderLayout.NORTH);
+		menuButton.add(centerMenuButton, BorderLayout.CENTER);
+		menuButton.add(Box.createRigidArea(new Dimension(0, 8)), BorderLayout.SOUTH);
+
+		return menuButton;
 	}
 	
 	// GAME VIEW FRONT END
