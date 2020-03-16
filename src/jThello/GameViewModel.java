@@ -14,7 +14,6 @@ import javax.swing.border.Border;
 public class GameViewModel implements ModelInterface {
 	
 	GameController gameController;
-
 	BackgroundPanel gameView;
 	
 	// 1. Upper half
@@ -96,17 +95,6 @@ public class GameViewModel implements ModelInterface {
 		gameView = new BackgroundPanel(ImageIO.read(new File("images/bg.png")), BackgroundPanel.TILED, 0.0f, 0.0f);
 	}
 	
-	// Loads image from given path into a label return object.
-	private JLabel loadImage(String filePath) throws IOException {
-		BufferedImage myPicture = ImageIO.read(new File(filePath));
-		return new JLabel(new ImageIcon(myPicture));
-	}
-
-	public ImageIcon loadImageRaw(String filePath) throws IOException {
-		BufferedImage myPicture = ImageIO.read(new File(filePath));
-		return new ImageIcon(myPicture);
-	}
-	
 	private void initializeBoardRow(JPanel init) {
 		init.setLayout(new GridLayout(0, 10, 0, 0));
 		init.setBackground( new Color(0, 0, 0, 0) );
@@ -127,9 +115,9 @@ public class GameViewModel implements ModelInterface {
 
 	public void initializePanel(MainWindow window) throws IOException {
 		boardIconsRaw = new ImageIcon[]{
-				loadImageRaw("images/jThello-piece-blank.png"),
-				loadImageRaw("images/jThello-piece-black.png"),
-				loadImageRaw("images/jThello-piece-white.png")
+				window.loadImageRaw("images/jThello-piece-blank.png"),
+				window.loadImageRaw("images/jThello-piece-black.png"),
+				window.loadImageRaw("images/jThello-piece-white.png")
 		};
 
 		// Add elements to screen.
@@ -151,7 +139,7 @@ public class GameViewModel implements ModelInterface {
 		leftInvisibleBlock.setBackground( new Color(0, 0, 0, 0) );
 		
 		// -- LOGO
-		mainLogo = loadImage("images/jThello_logo.png");
+		mainLogo = window.loadImage("images/jThello_logo.png");
 		leftLogoP.setLayout(new BoxLayout(leftLogoP, BoxLayout.X_AXIS));
 		leftLogoP.add(Box.createHorizontalGlue());
 		leftLogoP.add(mainLogo);
@@ -207,7 +195,7 @@ public class GameViewModel implements ModelInterface {
 						cornerPanel.setLayout(new BorderLayout());
 						cornerPanel.setBackground( new Color(0, 0, 0, 0) );
 
-						cornerPanel.add(loadImage("images/jThello-board-corner.png"), BorderLayout.SOUTH);
+						cornerPanel.add(window.loadImage("images/jThello-board-corner.png"), BorderLayout.SOUTH);
 
 						boardPieces[i][y] = cornerPanel;
 					} else if (y == 9) {
@@ -231,7 +219,7 @@ public class GameViewModel implements ModelInterface {
 
 						JPanel horizP = new JPanel();
 						horizP.setLayout(new BorderLayout());
-						horizP.add(loadImage("images/jThello-horiz.png"), BorderLayout.CENTER);
+						horizP.add(window.loadImage("images/jThello-horiz.png"), BorderLayout.CENTER);
 						horizP.setBackground( new Color(0, 0, 0, 0) );
 
 						numCoordPanel.add(coordP, BorderLayout.NORTH);
@@ -275,7 +263,7 @@ public class GameViewModel implements ModelInterface {
 
 						JPanel horizP = new JPanel();
 						horizP.setLayout(new BorderLayout());
-						horizP.add(loadImage("images/jThello-vert.png"), BorderLayout.CENTER);
+						horizP.add(window.loadImage("images/jThello-vert.png"), BorderLayout.CENTER);
 						horizP.setBackground( new Color(0, 0, 0, 0) );
 
 						numCoordPanel.add(coordP, BorderLayout.CENTER);
@@ -302,12 +290,12 @@ public class GameViewModel implements ModelInterface {
 
 						JPanel vertP = new JPanel();
 						vertP.setLayout(new BorderLayout());
-						vertP.add(loadImage("images/jThello-vert-short.png"), BorderLayout.CENTER);
+						vertP.add(window.loadImage("images/jThello-vert-short.png"), BorderLayout.CENTER);
 						vertP.setBackground( new Color(0, 0, 0, 0) );
 
 						JPanel horizP = new JPanel();
 						horizP.setLayout(new BorderLayout());
-						horizP.add(loadImage("images/jThello-horiz.png"), BorderLayout.CENTER);
+						horizP.add(window.loadImage("images/jThello-horiz.png"), BorderLayout.CENTER);
 						horizP.setBackground( new Color(0, 0, 0, 0) );
 
 						piecePanel.add(pieceP, BorderLayout.CENTER);
@@ -378,7 +366,7 @@ public class GameViewModel implements ModelInterface {
 		// Set up "lower container", which contains piece and score count.
 		tracker1LowerPanel.setLayout(new BoxLayout(tracker1LowerPanel, BoxLayout.X_AXIS));
 		tracker1LowerPanel.setBackground( new Color(0, 0, 0, 0) );
-		tracker1Piece = loadImage("images/jThello-piece-black-nobg.png");
+		tracker1Piece = window.loadImage("images/jThello-piece-black-nobg.png");
 		tracker1Score.setFont(window.fontTexBold.deriveFont(20f));
 		tracker1Score.setForeground(Color.BLACK);
 		tracker1LowerPanel.add(Box.createRigidArea(new Dimension(20, 0)));
@@ -411,7 +399,7 @@ public class GameViewModel implements ModelInterface {
 		// Set up "lower container", which contains piece and score count.
 		tracker2LowerPanel.setLayout(new BoxLayout(tracker2LowerPanel, BoxLayout.X_AXIS));
 		tracker2LowerPanel.setBackground( new Color(0, 0, 0, 0) );
-		tracker2Piece = loadImage("images/jThello-piece-white-nobg.png");
+		tracker2Piece = window.loadImage("images/jThello-piece-white-nobg.png");
 		tracker2Score.setFont(window.fontTexBold.deriveFont(20f));
 		tracker2Score.setForeground(Color.WHITE);
 		tracker2LowerPanel.add(Box.createRigidArea(new Dimension(20, 0)));

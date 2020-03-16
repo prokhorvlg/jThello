@@ -1,6 +1,7 @@
 package jThello;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -74,6 +75,18 @@ public class MainWindow extends JFrame {
 	public void Display() {
 		this.pack();
 		this.setSize(1200,700);
+	}
+
+	// Loads image from given path into a label return object.
+	public JLabel loadImage(String filePath) throws IOException {
+		BufferedImage myPicture = ImageIO.read(new File(filePath));
+		return new JLabel(new ImageIcon(myPicture));
+	}
+
+	// Loads image from given path directly into returned ImageIcon object.
+	public ImageIcon loadImageRaw(String filePath) throws IOException {
+		BufferedImage myPicture = ImageIO.read(new File(filePath));
+		return new ImageIcon(myPicture);
 	}
 	
 	// GAME VIEW FRONT END
