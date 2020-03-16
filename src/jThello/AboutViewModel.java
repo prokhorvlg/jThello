@@ -1,36 +1,31 @@
 package jThello;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import javax.swing.JButton;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import Libraries.BackgroundPanel;
+import Libraries.CustomButton;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class AboutViewModel implements ModelInterface {
 	
 	public AboutController aboutController;
-	public JPanel aboutView;
-	private JLabel jlabel;
+	public BackgroundPanel aboutView;
+
+	public CustomButton backButton;
 	
-	private JEditorPane contentPane;
-	public JScrollPane contentPanel;
-	
-	public JPanel backButtonPanel;
-	public JButton backButton;
-	
-	AboutViewModel() {
+	AboutViewModel() throws IOException {
 		aboutController = new AboutController();
-		aboutView = new JPanel(new BorderLayout());
+		aboutView = new BackgroundPanel(ImageIO.read(new File("images/bg.png")), BackgroundPanel.TILED, 0.0f, 0.0f);
 	}     
 
 	@Override
 	public void initializePanel(MainWindow window) {
 		// Add elements to screen.
-		buildTitlePanel();
-		buildAboutPanel();
-		buildBackPanel();
+		buildUpperPanel(window);
+		buildLowerPanel(window);
 	    // Add event listeners to buttons.
 	    aboutController.initializeEventHandlers(this, window);
 	}
@@ -39,31 +34,82 @@ public class AboutViewModel implements ModelInterface {
 	public JPanel getModel() {
 		return aboutView;
 	}
-	
-	// Constructs the panel containing the title
-	private void buildTitlePanel() {
-		jlabel = new JLabel("About");
-		jlabel.setHorizontalAlignment(JLabel.CENTER);
-		aboutView.add(jlabel, BorderLayout.NORTH);
-	}
-	
-	// Constructs the panel containing the About information
-	private void buildAboutPanel() {
-		String aboutText = "Welcome to JThello!";
-		contentPane = new JEditorPane();
-		contentPane.setEditable(false);
+
+	// Constructs the panel containing the information, and the title label.
+	private void buildUpperPanel(MainWindow window) {
+		JPanel upperHalf = new JPanel();
+		upperHalf.setLayout(new BoxLayout(upperHalf, BoxLayout.X_AXIS));
+		upperHalf.setBackground( new Color(0, 0, 0, 0) );
+
+		JPanel upperContainer = new JPanel();
+		upperContainer.setLayout(new BoxLayout(upperContainer, BoxLayout.Y_AXIS));
+		upperContainer.setBackground( new Color(0, 0, 0, 0) );
+
+		// Create title label/panel.
+		JPanel titleContainer = new JPanel();
+		titleContainer.setLayout(new BoxLayout(titleContainer, BoxLayout.X_AXIS));
+		titleContainer.setBackground( new Color(0, 0, 0, 0) );
+		JLabel titleLabel = new JLabel("About jThello");
+		titleLabel.setFont(window.fontTexBold.deriveFont(36f));
+		titleLabel.setForeground(Color.WHITE);
+		titleContainer.add(titleLabel);
+		titleContainer.add(Box.createHorizontalGlue());
+
+		// Create scrollable information field.
+		String aboutText = window.loadText("text-assets/about.txt");
+		JEditorPane contentPane = new JEditorPane();
+		contentPane.setEditable(true);
+		contentPane.setOpaque(true);
 		contentPane.setText(aboutText);
-        JScrollPane scrollPane = new JScrollPane(contentPane);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        aboutView.add(scrollPane, BorderLayout.CENTER);
+		contentPane.setFont(window.fontTexBold.deriveFont(12f));
+		contentPane.setForeground(window.ColorHighlight);
+		contentPane.setBackground(Color.decode("#0a2a16"));
+		JScrollPane scrollPane = new JScrollPane(contentPane);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+		// Compile components.
+		upperContainer.add(Box.createRigidArea(new Dimension(0, 40)));
+		upperContainer.add(titleContainer);
+		upperContainer.add(Box.createRigidArea(new Dimension(0, 30)));
+		upperContainer.add(scrollPane);
+		upperContainer.add(Box.createRigidArea(new Dimension(0, 40)));
+
+		upperHalf.add(Box.createRigidArea(new Dimension(40, 0)));
+		upperHalf.add(upperContainer);
+		upperHalf.add(Box.createRigidArea(new Dimension(40, 0)));
+
+		aboutView.add(upperHalf, BorderLayout.CENTER);
 	}
-	
+
 	// Constructs the panel containing the back button
-	private void buildBackPanel() {
-		backButton = new JButton("OK");
-		backButton.setPreferredSize(new Dimension(80, 40));
-		JPanel backButtonPanel = new JPanel(new BorderLayout());
-		backButtonPanel.add(backButton, BorderLayout.LINE_END);
-		aboutView.add(backButtonPanel, BorderLayout.SOUTH);	
+	private void buildLowerPanel(MainWindow window) {
+		backButton = window.initMenuButton("OK", "bottom");
+
+		JPanel lowerHalf = new JPanel();
+		lowerHalf.setLayout(new BoxLayout(lowerHalf, BoxLayout.Y_AXIS));
+		lowerHalf.setBackground( new Color(0, 0, 0, 0) );
+
+		JPanel lowerHalfUpperC = new JPanel();
+		JPanel lowerHalfInnerC = new JPanel();
+		JPanel lowerHalfLowerC = new JPanel();
+
+		lowerHalfUpperC.setBackground( new Color(0, 0, 0, 0) );
+		lowerHalfInnerC.setBackground( new Color(0, 0, 0, 0) );
+		lowerHalfLowerC.setBackground( new Color(0, 0, 0, 0) );
+
+		lowerHalfUpperC.add(Box.createRigidArea(new Dimension(0, 5)));
+
+		lowerHalfInnerC.setLayout(new BoxLayout(lowerHalfInnerC, BoxLayout.X_AXIS));
+		lowerHalfInnerC.add(Box.createHorizontalGlue());
+		lowerHalfInnerC.add(backButton);
+		lowerHalfInnerC.add(Box.createRigidArea(new Dimension(15, 0)));
+
+		lowerHalfLowerC.add(Box.createRigidArea(new Dimension(0, 5)));
+
+		lowerHalf.add(lowerHalfUpperC);
+		lowerHalf.add(lowerHalfInnerC);
+		lowerHalf.add(lowerHalfLowerC);
+
+		aboutView.add(lowerHalf, BorderLayout.SOUTH);
 	}
 }

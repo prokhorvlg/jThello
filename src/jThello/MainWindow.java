@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -20,6 +22,7 @@ public class MainWindow extends JFrame {
 	public ModelInterface setPlayerNameViewModel;
 	public ModelInterface highScoresModel;
 	public ModelInterface rulesModel;
+	public ModelInterface gameOverModel;
 
 	// Universally-used fonts and typographical settings.
 	public File fontTexBoldFile;
@@ -42,7 +45,7 @@ public class MainWindow extends JFrame {
 		aboutViewModel = new AboutViewModel();
 		highScoresModel = new HighScoresViewModel();
 		rulesModel = new RulesViewModel();
-		
+
 		// Initialize the content for all of the screens.
 		initializePanels();
 		
@@ -111,6 +114,17 @@ public class MainWindow extends JFrame {
 		menuButton.add(Box.createRigidArea(new Dimension(0, 8)), BorderLayout.SOUTH);
 
 		return menuButton;
+	}
+
+	// Returns the requests text document in string format.
+	public String loadText(String filePath) {
+		String res = "";
+		try {
+			res = new String(Files.readAllBytes(Paths.get(filePath)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 	// GAME VIEW FRONT END

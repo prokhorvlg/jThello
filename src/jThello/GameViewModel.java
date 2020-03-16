@@ -17,6 +17,18 @@ public class GameViewModel implements ModelInterface {
 	GameController gameController;
 	private boolean vsAI;
 
+	// Holds the variables required for game over screen/score collecting.
+	// Number of players (vsAI = 1, pvp = 2)
+	int numPlayers = -1;
+	// Player name(s)
+	String[] playerNames = new String[2];
+	// Winner text (you win!, you lost!, name won!)
+	String winner = "Error occurred.";
+	// Color of the winner text. If you lost, it's red, if you won, it's window.ColorHighlight (our brand green), etc...
+	Color winnerColor = Color.RED;
+	// Scores of the players at end of game.
+	int[] playerScores = {64, 2};
+
 	BackgroundPanel gameView;
 	
 	// 1. Upper half
@@ -93,10 +105,12 @@ public class GameViewModel implements ModelInterface {
 	CustomButton rulesButton;
 	CustomButton resignButton;
 	
-	GameViewModel(boolean _vsAI) throws IOException {
+	GameViewModel(boolean _vsAI, int _numPlayers, String[] _playerNames) throws IOException {
 		gameController = new GameController();
 		gameView = new BackgroundPanel(ImageIO.read(new File("images/bg.png")), BackgroundPanel.TILED, 0.0f, 0.0f);
 		vsAI = _vsAI;
+		numPlayers = _numPlayers;
+		playerNames = _playerNames;
 	}
 	
 	private void initializeBoardRow(JPanel init) {
@@ -519,7 +533,10 @@ public class GameViewModel implements ModelInterface {
 		gameController.resetBoard();
 		gameController.setStatus("Loading game...", Color.BLACK);
 		gameController.updateScores(0,0);
-		gameController.initializePlayers("Alice", "Bob");
+
+		// TODO: account for randomization in game generation. Robot can be player 1?
+		gameController.initializePlayers(playerNames[0], playerNames[1]);
+
 		gameController.setCurrentPlayer(0, "Alice's Turn");
 	}
 

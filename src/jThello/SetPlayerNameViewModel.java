@@ -15,6 +15,7 @@ public class SetPlayerNameViewModel implements ModelInterface {
 	public BackgroundPanel setPlayerNameView;
 
 	CustomButton okButton;
+	public JTextField[] textInputs = new JTextField[2];
 	
 	SetPlayerNameViewModel(int _numPlayers) throws IOException {
 		setPlayerNameController = new SetPlayerNameController();
@@ -95,17 +96,17 @@ public class SetPlayerNameViewModel implements ModelInterface {
 			JLabel tempLabel = new JLabel("Enter Player " + (i+1) + "'s " + "Name: ");
 			tempLabel.setFont(window.fontTexBold.deriveFont(14f));
 			tempLabel.setForeground(window.ColorHighlight);
-			JTextField textField = new JTextField();
-			textField.setFont(window.fontTexBold.deriveFont(14f));
-			textField.setPreferredSize(new Dimension(300,30));
-			textField.setMinimumSize(new Dimension(300,30));
-			textField.setMaximumSize(new Dimension(300,30));
+			textInputs[i] = new JTextField();
+			textInputs[i].setFont(window.fontTexBold.deriveFont(14f));
+			textInputs[i].setPreferredSize(new Dimension(300,30));
+			textInputs[i].setMinimumSize(new Dimension(300,30));
+			textInputs[i].setMaximumSize(new Dimension(300,30));
 
 			// Add components to container.
 			inputPanel.add(Box.createHorizontalGlue());
 			inputPanel.add(tempLabel);
 			inputPanel.add(Box.createRigidArea(new Dimension(40, 0)));
-			inputPanel.add(textField);
+			inputPanel.add(textInputs[i]);
 			inputPanel.add(Box.createHorizontalGlue());
 
 			// Add container to master panel.

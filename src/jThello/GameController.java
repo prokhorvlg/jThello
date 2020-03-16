@@ -14,12 +14,19 @@ public class GameController {
 		window = _window;
 
 		gameViewModel.rulesButton.addActionListener(new rulesButtonListener());
+		gameViewModel.resignButton.addActionListener(new resignButtonListener());
 		initializeBoardEventHandlers();
 	}
 
 	private class rulesButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			window.openView(window.mainMenuModel);
+			gameOver();
+		}
+	}
+
+	private class resignButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			resign();
 		}
 	}
 
@@ -126,11 +133,20 @@ public class GameController {
 
 	// Goes to Game Over screen.
 	public void gameOver() {
+		try {
+			// TODO: UPLOAD TO HIGH SCORES HERE.
 
+			// Open the game over view.
+			window.gameOverModel = new GameOverViewModel(gameViewModel.numPlayers, gameViewModel.playerNames, gameViewModel.winner, gameViewModel.winnerColor, gameViewModel.playerScores);
+			window.gameOverModel.initializePanel(window);
+			window.openView(window.gameOverModel);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	// Goes back to main menu.
 	public void resign() {
-
+		window.openView(window.mainMenuModel);
 	}
 }

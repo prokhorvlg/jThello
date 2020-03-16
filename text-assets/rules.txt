@@ -1,0 +1,398 @@
+THE OFFICIAL RULES OF OTHELLO
+
+INTRODUCTION
+
+It is the purpose of these rules to prescribe a standardized set of regulations 
+for use in Othello
+tournaments sanctioned by the United States Othello Association, and to thereby 
+ensure that all
+tournaments are conducted smoothly, uniformly, and fairly.
+
+The exigencies of tournament play are too many and too various to be subsumed 
+under any set of
+regulations, no matter how encyclopedic.  These rules are therefore not meant 
+to be comprehensive,
+and the Tournament Director is expected to exercise intelligence and common 
+sense when confronted
+with contingencies not discussed herein.
+
+These rules have been divided into ten separate sections as follows:
+
+1.   Equipment
+
+2.   The Starting Position
+
+3.   The Move
+
+4.   Determining the Winner and Scoring the Game
+
+5.   The Timepiece
+
+6.   Default
+
+7.   Improper Moves
+
+8.   General Conduct
+
+9.   Penalties
+
+10. Miscellaneous
+
+SECTION 1:  EQUIPMENT
+
+1.1.  Othello is played by two players on a board composed of 64 equal squares 
+arranged in an 8-
+square-by-8-square grid and with 64 discs which are black on one side and white 
+on the other.
+
+1.2.  If the disc trays are built into the playing board, then unless both 
+players agree otherwise, the
+board is placed so that the disc trays are directly in front of the players.
+
+1.3.  Before the game begins, the discs are divided equally between the two 
+players.
+
+1.4.  If at any point during a game a player runs out of discs, then he may 
+take as many discs as he
+requires from his opponent, and his opponent must surrender the required discs 
+without delay.
+
+SECTION 2:  THE STARTING POSITION
+
+2.1.  Before the game begins, each player places two discs on the board.  The 
+discs should be placed on
+the board's four central squares so that, as each player faces the board, discs 
+with the black side facing
+upwards lie on the near-left-to-far-right diagonal and discs with the white 
+side facing upwards lie on
+the near-right-to-far-left diagonal.
+
+
+SECTION 3:  THE MOVE
+
+3.1.  When placing discs on the board, one player always places discs with the 
+black side facing
+upwards and the other player always places discs with the white side facing 
+upwards.  The former
+player        is referred to as “Black”; the latter player is referred to as 
+“White”.  Discs with the black side
+facing upwards are referred to as “black discs”; discs with the white side 
+facing upwards are referred to
+as “white discs”.
+
+3.2.  When it is his turn to play, a player places a disc in a vacant square so 
+that in at least one direction
+(vertically, horizontally, or diagonally) his newly-placed disc, acting in 
+conjunction with a pre-existing
+disc of his own color, brackets in an unbroken line one or more discs of his 
+opponent's color.  The disc
+or discs thus bracketed are then turned over or “flipped” to become the same 
+color as the newly-placed
+disc.  If a newly-placed disc produces bracketing in several directions at 
+once, then all the bracketed
+discs in all such directions are flipped.
+
+3.3.  A full move consists of placing a disc on a square to which a legal move 
+can be made (a “legal
+square”) and flipping all the appropriate discs.  A move is not complete until 
+all the appropriate discs
+have been flipped.
+
+3.4.  Black makes the first move of the game.
+
+3.5.  Except as discussed in Rule 3.7, players take turns making moves.
+
+3.6.  When it is his turn to move, a player may not refuse to move if there is 
+a legal move available to
+him.
+
+3.7.  If on a player's turn there is no legal move available to him, then he 
+forfeits his turn.
+
+3.8.  If a player on his turn to move touches a disc to a legal square, then 
+the player must move to that
+square.
+
+3.9.  If a player accidentally drops a disc onto the board, then he may 
+retrieve that disc without penalty
+no matter where it lands.  A disc is said to be “dropped” when it is not in 
+contact with the player's hand
+as it first touches the board.
+
+3.10.  When it is his turn to move, a player may, if he wishes, straighten the 
+alignment of the discs on
+the board.
+
+SECTION 4:  DETERMINING THE WINNER AND SCORING THE GAME
+
+4.1.  The game is ended when neither player possesses a legal move.
+
+4.2.  Except as discussed in Section 6 (Default), if after the game is ended a 
+majority of the discs on the
+board are black, then Black is the winner; if a majority of the discs are 
+white, then White is the winner.
+If there are an equal number of black and white discs on the board, then the 
+game is a tie.
+
+
+4.3.  Except as discussed in Rule 4.4 and Section 6 (Default), after the game 
+is ended, Black is assigned
+a score equal to the number of black discs in the final board position and 
+White is assigned a score
+equal to the number of white discs in the final board position.
+
+4.4.  If a player succeeds in entirely eliminating all discs of his opponent's 
+color from the board, then
+regardless of the final board position that player is assigned a score of 64 
+and his opponent is assigned
+a score of 0.
+
+SECTION 5:  THE TIMEPIECE
+
+5.1.  During a game, each player is required to complete all his moves within 
+the period of time
+prescribed by the Tournament Director.
+
+5.2.  Time usage is monitored by a timepiece, usually a dual-faced “chess 
+clock” equipped with buttons
+for starting and stopping each face and a “flag” or similar mechanism for 
+indicating the moment when
+the prescribed amount of time has expired.
+
+5.3.  For the purposes of this section, the phrase “hits his clock” shall mean 
+that a player pushes the
+button above the clock-face nearest him all the way down so as to stop the 
+clock nearest him (“his
+clock”) and start the clock nearest his opponent (“his opponent's clock”); the 
+phrase “stops the clock”
+shall mean that both clocks are stopped by pushing either button half-way down.
+
+5.4.  The choice of clock position (that is, whether the clock shall be on the 
+left or right side of the
+board) is granted to Black.  If the Tournament Director has prescribed a fixed 
+position for the clock,
+then Black is permitted to choose his seat and thereby determine his position 
+relative to the clock.
+
+5.5.  It is the joint responsibility of both players to confirm before the 
+start of play that both clocks are
+stopped and properly set.
+
+5.6.  When the Tournament Director gives the signal to begin the game, White 
+hits his clock.  Black is
+then free to make his first move.
+
+5.7.  During the course of a game, each player hits his clock after completing 
+each of his moves (that is,
+after placing a disc on the board and flipping all the appropriate discs).
+
+5.8.  If at any point during a game a player on his turn has no legal move 
+available to him, then he shall
+indicate that his move is forfeited by saying “pass” and hitting his clock.
+
+5.9.  If a player fails to hit his clock immediately after completing his move, 
+then his opponent may
+draw the failure to the player's attention, or he may wait for the player to 
+notice and correct the
+oversight, or he may proceed with his own next move, as he wishes.
+
+5.10.  During the course of a game, only the Tournament Director is empowered 
+to stop the clock.
+
+5.11.  Once the clock is stopped, it may be started again only by order of the 
+Tournament Director.
+
+5.12.  A player may not obstruct his opponent's view of the clock at any point 
+during a game.
+
+
+5.13.  A player may not keep either of his hands in prolonged contact with the 
+clock during a game.
+
+SECTION 6:  DEFAULT
+
+6.1.  If at any point during a game, a player's flag falls and his opponent's 
+flag has not previously fallen,
+then that player is in default.
+
+6.2.  Even if a player has completed his final move of the game, he is still 
+required to hit his clock
+before his flag falls in order to avoid being in default.
+
+6.3.  If a player's flag falls while he is in the process of making a move 
+(that is, after he has touched a
+disc to a legal square but before he has flipped all the appropriate discs), 
+then he shall complete the
+move before default is declared.
+
+6.4.  If the falling of a player's flag goes unobserved, default occurs the 
+moment the fallen flag is first
+noticed by either player or by the Tournament Director.
+
+6.5.  After a player's flag falls, the Tournament Director must be summoned to 
+confirm the default.  The
+defaulting player's clock must be allowed to run while the Tournament Director 
+is summoned; if
+necessary, the non-defaulting player may hit his clock without making a move in 
+order to prevent his
+clock from running while the Tournament Director is summoned.
+
+6.6.  After the default has been confirmed, the defaulting player is declared 
+the loser of the game and
+his opponent is declared the winner.
+
+6.7.  After the winner has been declared, the Tournament Director stops the 
+clock and resets the
+defaulting player's clock so as to allow him two minutes of additional play; at 
+a signal from the
+Tournament Director, the appropriate clock is then hit and the game continues.  
+Likewise, if at any time
+prior to the end of the game the non-defaulting player's flag falls, the 
+Tournament Director resets the
+non-defaulting player's clock to two minutes, the appropriate clock is then 
+hit, and the game continues.
+If at any time either player's flag falls a second time, then play ceases and 
+the Tournament Director
+declares the game ended.
+
+6.8.  A defaulted game is scored as follows:  if neither player's flag has 
+fallen a second time, then the
+game is scored according the the procedures used for non-defaulted games (Rules 
+4.3 and 4.4) unless
+the non-defaulting player does not possess a majority of the discs, in which 
+case the game is scored as a
+32-31 win for the non-defaulting player; if the defaulting player's flag has 
+fallen a second time, then the
+game is scored as a 64-0 win for the non-defaulting player; if the 
+non-defaulting player's flag has fallen
+a second time, then the game is scored as a 32-31 win for the non-defaulting 
+player.
+
+SECTION 7:  IMPROPER MOVES
+
+7.1.  If in the course of making a move a player flips one or more discs that 
+should not be flipped or
+fails to flip one or more discs that should be flipped, then he has the right 
+to correct the error (and his
+opponent has the right to demand a correction) provided that his opponent has 
+not yet committed
+himself     to a subsequent move.
+
+
+7.2.  If a player places a disc of the improper color on the board and if his 
+opponent's preceding move
+was made with a disc of the proper color, then the erring player has the right 
+to retract his move (and
+his opponent has the right to demand a retraction) provided that his opponent 
+has not yet committed
+himself to a subsequent move; however, by virtue of the touch-move rule (Rule 
+3.8) after the retraction,
+the erring player must, if possible, make a proper move to the square where the 
+improperly-colored disc
+was placed.
+
+7.3.  If a player places a disc of the improper color on the board and his 
+opponent's preceding move
+was likewise made with a disc of the improper color, then both improper moves 
+and the resulting
+reversed color assignments must stand for the remainder of the game.
+
+7.4.  The time required to correct an improper move must be charged to the 
+player who commits the
+error.  Accordingly, if a player has hit his clock after making an improper 
+move, then his opponent has
+the right to hit his own clock (or the erring player must hit his opponent's 
+clock) before a correction is
+made.
+
+7.5.  When asking that an improper move be corrected, a player must indicate 
+clearly the nature of the
+requested correction.  If the improper move in question is an illegal pass, the 
+player requesting the
+correction must indicate at least one legal move available to his opponent.
+
+7.6.  If a player disturbed the board position, then the time required to 
+restore the board to a position
+acceptable to both players must be charged to the player responsible for the 
+disturbance.  If a player
+disturbs  the board position to the point where the board cannot be restored to 
+a position acceptable to
+both players, then the Tournament Director must be summoned.  The Tournament 
+Director is
+empowered to stop the clock and call upon any available resources (including, 
+but not limited to,
+transcripts   and spectators) in order to resolve the dispute.  If the 
+Tournament Director concludes that
+the     game cannot be resumed, then the player responsible for the disturbance 
+shall be declared the loser
+and his opponent shall be awarded a 64-0 win.
+
+SECTION 8:  GENERAL CONDUCT
+
+8.1.  A player is permitted to record his games or to have his games recorded 
+by an associate.
+
+8.2.  During a game, a player may not confer with any outside party, make use 
+of any reference
+material, or analyze the game on a separate board.
+
+8.3.  During a game, a player may not leave the playing table except with the 
+express permission of the
+Tournament Director.
+
+8.4.  A player may not distract, annoy, or harass his opponent in any manner 
+whatsoever.
+
+SECTION 9:  PENALTIES
+
+9.1.  The Tournament Director may, at his discretion, warn or penalize any 
+player who is guilty of
+infractions of the rules or other misconduct.
+
+9.2.  Penalties may include, but are not limited to, time dockage, game 
+forfeiture, and encforced bodily
+
+
+expulsion.  A game forfeiture shall be scored as a 64-0 win for the 
+non-forfeiting player.
+
+9.3.  When imposing a time dockage, the Tournament Director is empowered to 
+adjust the guilty
+player's clock so as to eliminate up to one-half the time remaining on the 
+clock.  If in the opinion of the
+Tournament Director the magnitude of the misconduct in question is such that 
+the maximum allowable
+time dockage constitutes insufficient punishment, then the Tournament Director 
+is empowered to
+increase the penalty by awarding extra time to the non-guilty player and 
+adjusting the non-guilty
+player's clock accordingly.
+
+9.4.  If during a game, a player suffers a significant loss of time in 
+summoning the Tournament
+Director, the Tournament Director is empowered to adjust that player's clock so 
+as to restore the lost
+time.
+
+9.5.  The USOA reserves the right to apply sanctions against any player who is 
+guilty of repeated
+infractions of the rules or flagrant misconduct.  These sanctions may include, 
+but are not limited to,
+stripping of championship titles, revocation of Grand Prix points, probationary 
+exclusion from
+tournament play, and permanent exclusion from tournament play.
+
+SECTION 10:  MISCELLANEOUS
+
+10.1.  Ignorance of these rules shall not excuse a player from abiding by them.
+
+10.2.  Should any dispute arise during the competition due to factors not 
+specifically discussed in these
+rules, then the Tournament Director shall settle the dispute in the spirit of 
+these rules and in the spirit of
+fairness, and his decision shall be binding on all players.
+
+10.3.  These rules may, from time to time, be revised or amended by a majority 
+of the Board of
+Directors of the United States Othello Association.
+

@@ -81,6 +81,8 @@ public class CustomButton extends JPanel implements MouseListener {
 
         public void mouseClicked(MouseEvent e){
             fireEvent(new ActionEvent(this,0, title));
+            hover = false;
+            hit = false;
         }
 
         public void mouseEntered(MouseEvent e){

@@ -1,0 +1,7 @@
+jThello
+A Classic Board Game
+v1.0 (release)
+
+By:
+- Valentin Sigalov (GUI, look and feel)
+- Alex Veltchev (GUI, back end)
