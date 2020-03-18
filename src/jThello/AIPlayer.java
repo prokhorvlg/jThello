@@ -6,13 +6,13 @@ public class AIPlayer extends Player {
 	private int depth;
 	
 	AIPlayer(int d) {
-		this.depth = d;
+		depth = d;
 	}
 	
 	public MovePair minimax(GameState state, Move move, boolean isMax, int currDepth) {
 		MovePair result = null;
 		List<Move> moves = state.allMoves();
-		if ((moves.size() == 0) || (currDepth == this.depth) || (state.gameOver())) {
+		if ((moves.size() == 0) || (currDepth == depth) || (state.gameOver())) {
 			return new MovePair(move,state.finalScore());
 		}
 		if (isMax) {
