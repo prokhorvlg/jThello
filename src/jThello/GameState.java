@@ -36,7 +36,6 @@ public class GameState {
         board[size/2][size/2] = PLAYER1;
         board[size/2-1][size/2] = PLAYER2;
         board[size/2][size/2-1] = PLAYER2;
-
     }
     
     // Creates a copy of the game state
@@ -130,6 +129,7 @@ public class GameState {
         return score;
     }
 	
+	// Returns the current score for the given player
 	public int score(int player) {
 		int score = 0;
         for(int i = 0; i < size; i++)
@@ -138,27 +138,16 @@ public class GameState {
         return score;
 	}
     
+	// Determines whether the game is over
     public boolean gameOver() {
     	int Nmoves = allMoves(PLAYER1).size() + allMoves(PLAYER2).size();
         return (Nmoves == 0);
     }
     
+    // Clones the game state and makes the given move returning a new state
     public GameState applyMoveAndClone(Move move) {
         GameState newState = clone();
         newState.makeMove(move);
         return newState;
-    }
-    
-    public String toString() {
-        StringBuffer output = new StringBuffer();
-        for(int j = 0;j<size;j++) {
-            for(int i = 0;i<size;i++) {
-                if (board[i][j]==PLAYER1) output.append("O");
-                else if (board[i][j]==PLAYER2) output.append("X");
-                else output.append(".");
-            }
-            output.append("\n");
-        }
-        return output.toString();
     }
 }

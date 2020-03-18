@@ -61,46 +61,45 @@ public class GameController {
 			// THIS IS THE EVENT HANDLER FOR BOARD PIECES.
 			// When this is run, the variables x and y are stored in order for the back end to know what was clicked.
 
-			// gameInput(x, y);
-
-			// TODO: Enter back end call here.
 			if ((vsAI) && (gameState.nextPlayerToMove == GameState.PLAYER2)) return;
-			System.out.println("(" + x + ", " + y + ")");
+			// Generate a list of possible moves from the current game state
 			List<Move> possibleMoves = gameState.allMoves();
-			for (Move m: possibleMoves) {
-				System.out.print(m+" ");
-			}
-			System.out.println();
+			// Quit the game when there are no possible moves
 			if (possibleMoves.size() == 0) {
-				setStatus("No Legal Moves", Color.RED);
+				gameOver();
 				return;
 			}
-			System.out.println(gameState.toString());
+			// Creates the move from user input
 			Move m = new Move(gameState.nextPlayerToMove, x, y);
-			System.out.println(m);
+			// Make the move if it is a legal move
 			if (possibleMoves.contains(m)) {
 				setStatus(m.toString(), Color.BLACK);
 				gameState = gameState.applyMoveAndClone(m);
-				System.out.println(gameState.toString());
 				try {
+					// Update the board GUI
 					updateBoard(gameState.board);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+				// Set the current player to the next player
 				setCurrentPlayer(gameState.nextPlayerToMove);
+				// Update the score tracker
 				updateScores(gameState.score(GameState.PLAYER1), gameState.score(GameState.PLAYER2));
 				if (vsAI) {
-//					setStatus("Thinking", Color.BLACK);
+					// Make the AI's move
 					gameState = gameState.applyMoveAndClone(players[1].getMove(gameState));
-					System.out.println(gameState.toString());
 					try {
+						// Update the board GUI
 						updateBoard(gameState.board);
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+					// Set the current player to the next player
 					setCurrentPlayer(gameState.nextPlayerToMove);
+					// Update the score tracker
 					updateScores(gameState.score(GameState.PLAYER1), gameState.score(GameState.PLAYER2));
 				}
+				// Quit the game if either player has no legal moves
 				if (gameState.gameOver()) {
 					gameOver();
 				}
@@ -200,6 +199,7 @@ public class GameController {
 			int score2 = gameState.score(GameState.PLAYER2);
 			int[] playerScores = {score1,score2};
 			int winner = 0;
+			// Figure out the winner
 			if (score2 > score1) winner = 1;
 			window.gameOverModel = new GameOverViewModel(
 					gameViewModel.numPlayers, 
