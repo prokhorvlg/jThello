@@ -11,6 +11,7 @@ public class GameController {
 	GameState gameState;
 	MainWindow window;
 	Player[] players;
+	boolean vsAI;
 	
 	GameController() {
 		gameState = new GameState(8);
@@ -63,6 +64,7 @@ public class GameController {
 			// gameInput(x, y);
 
 			// TODO: Enter back end call here.
+			if ((vsAI) && (gameState.nextPlayerToMove == GameState.PLAYER2)) return;
 			System.out.println("(" + x + ", " + y + ")");
 			List<Move> possibleMoves = gameState.allMoves();
 			for (Move m: possibleMoves) {
@@ -86,6 +88,22 @@ public class GameController {
 					e1.printStackTrace();
 				}
 				setCurrentPlayer(gameState.nextPlayerToMove);
+				updateScores(gameState.score(GameState.PLAYER1), gameState.score(GameState.PLAYER2));
+				if (vsAI) {
+//					setStatus("Thinking", Color.BLACK);
+					gameState = gameState.applyMoveAndClone(players[1].getMove(gameState));
+					System.out.println(gameState.toString());
+					try {
+						updateBoard(gameState.board);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					setCurrentPlayer(gameState.nextPlayerToMove);
+					updateScores(gameState.score(GameState.PLAYER1), gameState.score(GameState.PLAYER2));
+				}
+				if (gameState.gameOver()) {
+					gameOver();
+				}
 			}
 			else {
 				setStatus("Ilegal Move", Color.RED);
@@ -101,7 +119,8 @@ public class GameController {
 		gameViewModel.tracker1Name.setText(name1);
 		gameViewModel.tracker2Name.setText(name2);
 		players[0] = new HumanPlayer();
-		if (_vsAI) players[1] = new AIPlayer();
+		vsAI = _vsAI;
+		if (_vsAI) players[1] = new AIPlayer(5);
 		else players[1] = new HumanPlayer();
 	}
 
@@ -177,7 +196,17 @@ public class GameController {
 			// TODO: UPLOAD TO HIGH SCORES HERE.
 
 			// Open the game over view.
-			window.gameOverModel = new GameOverViewModel(gameViewModel.numPlayers, gameViewModel.playerNames, gameViewModel.winner, gameViewModel.winnerColor, gameViewModel.playerScores);
+			int score1 = gameState.score(GameState.PLAYER1);
+			int score2 = gameState.score(GameState.PLAYER2);
+			int[] playerScores = {score1,score2};
+			int winner = 0;
+			if (score2 > score1) winner = 1;
+			window.gameOverModel = new GameOverViewModel(
+					gameViewModel.numPlayers, 
+					gameViewModel.playerNames, 
+					gameViewModel.playerNames[winner], 
+					gameViewModel.winnerColor, 
+					playerScores);
 			window.gameOverModel.initializePanel(window);
 			window.openView(window.gameOverModel);
 		} catch (IOException e1) {
@@ -185,8 +214,7 @@ public class GameController {
 		}
 	}
 
-	// Goes back to main menu.
 	public void resign() {
-		window.openView(window.mainMenuModel);
+		gameOver();
 	}
 }

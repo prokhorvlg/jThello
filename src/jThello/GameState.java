@@ -129,6 +129,14 @@ public class GameState {
             }
         return score;
     }
+	
+	public int score(int player) {
+		int score = 0;
+        for(int i = 0; i < size; i++)
+            for(int j = 0; j < size; j++)
+                if (board[i][j] == PLAYER1) score++;
+        return score;
+	}
     
     public boolean gameOver() {
     	int Nmoves = allMoves(PLAYER1).size() + allMoves(PLAYER2).size();
