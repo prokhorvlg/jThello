@@ -64,7 +64,7 @@ public class GameController {
 
 			// TODO: Enter back end call here.
 			System.out.println("(" + x + ", " + y + ")");
-			List<Move> possibleMoves = gameState.generateMoves();
+			List<Move> possibleMoves = gameState.allMoves();
 			for (Move m: possibleMoves) {
 				System.out.print(m+" ");
 			}
