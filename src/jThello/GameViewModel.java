@@ -509,8 +509,8 @@ public class GameViewModel implements ModelInterface {
 
 		lowerHalfInnerC.setLayout(new BoxLayout(lowerHalfInnerC, BoxLayout.X_AXIS));
 		lowerHalfInnerC.add(Box.createHorizontalGlue());
-		lowerHalfInnerC.add(rulesButton);
-		lowerHalfInnerC.add(Box.createRigidArea(new Dimension(10, 0)));
+		//lowerHalfInnerC.add(rulesButton);
+		//lowerHalfInnerC.add(Box.createRigidArea(new Dimension(10, 0)));
 		lowerHalfInnerC.add(resignButton);
 		lowerHalfInnerC.add(Box.createRigidArea(new Dimension(15, 0)));
 
