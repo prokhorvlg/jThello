@@ -1,6 +1,6 @@
 package jThello;
 
-public class Score {
+public class Score implements Comparable<Score> {
     public String rank;
     public String name;
     public String score;
@@ -8,5 +8,10 @@ public class Score {
         rank = _rank;
         name = _name;
         score = _score;
+    }
+
+    @Override
+    public int compareTo(Score i) {
+        return (Integer.compare(Integer.parseInt(this.score), Integer.parseInt(i.score)));
     }
 }
