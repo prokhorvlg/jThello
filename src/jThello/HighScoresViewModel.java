@@ -5,7 +5,6 @@ import Libraries.CustomButton;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.io.File;
@@ -62,7 +61,7 @@ public class HighScoresViewModel implements ModelInterface {
 
 		// Create scrollable information field.
 		Object[][] scoresData = highScoresController.convertListIntoObject(highScoresController.readCSVIntoList("text-assets/scores.csv"));
-		String[] columnNames = {"Rank", "Name", "Score"};
+		String[] columnNames = {"Player Name", "Score"};
 
 		JTable scoresTable = new JTable(scoresData, columnNames);
 
@@ -128,10 +127,6 @@ public class HighScoresViewModel implements ModelInterface {
 		lowerHalf.add(lowerHalfLowerC);
 
 		highScoresView.add(lowerHalf, BorderLayout.SOUTH);
-	}
-	
-	private void generateTable() {
-		// TODO
 	}
 }
 

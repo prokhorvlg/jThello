@@ -36,7 +36,7 @@ public class HighScoresController {
 			String line = br.readLine();
 			while (line != null) {
 				String[] items = line.split(",");
-				Score newScore = new Score(items[0], items[1], items[2]);
+				Score newScore = new Score(items[0], items[1]);
 				myScores.add(newScore);
 				line = br.readLine();
 			}
@@ -54,7 +54,7 @@ public class HighScoresController {
 		// Cycle through each score and convert into object array.
 		int counter = 0;
 		for (Score score : myScores) {
-			myScoresObject[counter] = new Object[]{score.rank, score.name, score.score};
+			myScoresObject[counter] = new Object[]{score.name, score.score};
 			counter++;
 		}
 

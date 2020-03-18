@@ -2,6 +2,7 @@ package jThello;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class GameController {
 			Move m = new Move(gameState.nextPlayerToMove, x, y);
 			// Make the move if it is a legal move
 			if (possibleMoves.contains(m)) {
-				setStatus(m.toString(), Color.BLACK);
+				setStatus(gameViewModel.playerNames[gameState.nextPlayerToMove] + " played the move: " + m.toString(), Color.BLACK);
 				gameState = gameState.applyMoveAndClone(m);
 				try {
 					// Update the board GUI
@@ -86,8 +87,10 @@ public class GameController {
 				// Update the score tracker
 				updateScores(gameState.score(GameState.PLAYER1), gameState.score(GameState.PLAYER2));
 				if (vsAI) {
+					setStatus("Thinking...", Color.BLACK);
 					// Make the AI's move
-					gameState = gameState.applyMoveAndClone(players[1].getMove(gameState));
+					Move AIMove = players[1].getMove(gameState);
+					gameState = gameState.applyMoveAndClone(AIMove);
 					try {
 						// Update the board GUI
 						updateBoard(gameState.board);
@@ -98,6 +101,7 @@ public class GameController {
 					setCurrentPlayer(gameState.nextPlayerToMove);
 					// Update the score tracker
 					updateScores(gameState.score(GameState.PLAYER1), gameState.score(GameState.PLAYER2));
+					setStatus(gameViewModel.playerNames[1] + " played the move: " + AIMove.toString(), Color.BLACK);
 				}
 				// Quit the game if either player has no legal moves
 				if (gameState.gameOver()) {
@@ -105,7 +109,7 @@ public class GameController {
 				}
 			}
 			else {
-				setStatus("Ilegal Move", Color.RED);
+				setStatus("Illegal move. Please retry...", Color.RED);
 			}
 		}
 	}
@@ -121,6 +125,7 @@ public class GameController {
 		vsAI = _vsAI;
 		if (_vsAI) players[1] = new AIPlayer(5);
 		else players[1] = new HumanPlayer();
+		setStatus("Waiting for " + gameViewModel.playerNames[0] + "...", Color.decode("#22d064"));
 	}
 
 	// Sets the current active player in the GUI based on the given input.
@@ -136,7 +141,6 @@ public class GameController {
 			gameViewModel.turnTracker.setForeground(Color.WHITE);
 			gameViewModel.turnTracker.setText(gameViewModel.tracker2Name.getText() + "'s Turn");
 		}
-		// gameViewModel.turnTracker.setText(input);
 	}
 
 	// Update scores on GUI.
@@ -188,12 +192,26 @@ public class GameController {
 		// Run the board.
 		updateBoard(resetBoard);
 	}
+	
+	private void recordHighScore(int winner, int score) {
+		try {
+			FileWriter pw = new FileWriter("text-assets/scores.csv",true);
+			StringBuilder sb = new StringBuilder();
+			sb.append(gameViewModel.playerNames[winner]);
+			sb.append(",");
+			sb.append(score);
+			sb.append("\n");
+			pw.append(sb);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
 
 	// Goes to Game Over screen.
 	public void gameOver() {
 		try {
-			// TODO: UPLOAD TO HIGH SCORES HERE.
-
 			// Open the game over view.
 			int score1 = gameState.score(GameState.PLAYER1);
 			int score2 = gameState.score(GameState.PLAYER2);
@@ -201,6 +219,7 @@ public class GameController {
 			int winner = 0;
 			// Figure out the winner
 			if (score2 > score1) winner = 1;
+			recordHighScore(winner, playerScores[winner]);
 			window.gameOverModel = new GameOverViewModel(
 					gameViewModel.numPlayers, 
 					gameViewModel.playerNames, 
