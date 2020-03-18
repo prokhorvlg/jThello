@@ -3,17 +3,17 @@ package jThello;
 public class Move {
 
 	int player;
-	int x,y;
+	int row,col;
 	
-    public Move(int _player, int _x, int _y) {
+    public Move(int _player, int r, int c) {
         player = _player;
-        x = _x;
-        y = _y;
+        row = r;
+        col = c;
     }
     
     @Override
     public String toString() {
-    	return ""+ player + ": (" + x + ", " + y + ")";
+    	return ""+ player + ": (" + row + ", " + col + ")";
     }
     
 	@Override
@@ -21,8 +21,8 @@ public class Move {
 		if (obj != null && obj instanceof Move) {
 			Move other = (Move) obj;
 			if (player != other.player) return false;
-			if (x != other.x) return false;
-			if (y != other.y) return false;
+			if (row != other.row) return false;
+			if (col != other.col) return false;
 			return true;
 		}
 		return false;
