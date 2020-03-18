@@ -37,7 +37,7 @@ public class HighScoresController {
 			String line = br.readLine();
 			while (line != null) {
 				String[] items = line.split(",");
-				Score newScore = new Score(items[0], items[1], items[2]);
+				Score newScore = new Score(items[0], items[1]);
 				myScores.add(newScore);
 				line = br.readLine();
 			}

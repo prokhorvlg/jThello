@@ -1,11 +1,9 @@
 package jThello;
 
 public class Score implements Comparable<Score> {
-    public String rank;
     public String name;
     public String score;
-    Score(String _rank, String _name, String _score) {
-        rank = _rank;
+    Score(String _name, String _score) {
         name = _name;
         score = _score;
     }

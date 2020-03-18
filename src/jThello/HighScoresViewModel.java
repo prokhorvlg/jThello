@@ -138,7 +138,7 @@ public class HighScoresViewModel implements ModelInterface {
 
 		highScoresView.add(lowerHalf, BorderLayout.SOUTH);
 	}
-	
+
 	private void updateHighScores() {
 		List<Score> myScores = highScoresController.readCSVIntoList("text-assets/scores.csv");
 		highScoresController.sortListOfScores(myScores);

@@ -103,7 +103,7 @@ public class GameOverViewModel implements ModelInterface {
 
 		winLabelCenter.add(Box.createHorizontalGlue());
 
-		JLabel winLabel = new JLabel(winner);
+		JLabel winLabel = new JLabel(winner + " won!");
 
 		JPanel winLabelInner = new JPanel();
 		winLabelInner.setLayout(new BoxLayout(winLabelInner, BoxLayout.X_AXIS));

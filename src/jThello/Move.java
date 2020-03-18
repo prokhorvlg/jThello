@@ -13,7 +13,9 @@ public class Move {
     
     @Override
     public String toString() {
-    	return ""+ player + ": (" + row + ", " + col + ")";
+    	String[] coordsX = {"A", "B", "C", "D", "E", "F", "G", "H"};
+		String[] coordsY = {"1", "2", "3", "4", "5", "6", "7", "8"};
+    	return "(" + coordsX[row] + ", " + coordsY[col] + ")";
     }
     
 	@Override
