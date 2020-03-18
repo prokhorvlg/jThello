@@ -24,8 +24,8 @@ public class GameViewModel implements ModelInterface {
 	
 	// Winner text (you win!, you lost!, name won!)
 	String winner = "Error occurred.";
-	// Color of the winner text. If you lost, it's red, if you won, it's window.ColorHighlight (our brand green), etc...
-	Color winnerColor = Color.RED;
+	// Color of the winner text
+	Color winnerColor = Color.decode("#22d064");
 	// Scores of the players at end of game.
 	int[] playerScores = {64, 2};
 
