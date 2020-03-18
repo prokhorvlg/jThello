@@ -13,10 +13,12 @@ public class GameController {
 	MainWindow window;
 	Player[] players;
 	boolean vsAI;
+	boolean resigned;
 	
 	GameController() {
 		gameState = new GameState(8);
 		players = new Player[2];
+		resigned = false;
 	}
 	
 	public void initializeEventHandlers(GameViewModel _gameViewModel, MainWindow _window) {
@@ -192,8 +194,10 @@ public class GameController {
 
 		// Run the board.
 		updateBoard(resetBoard);
+		updateScores(gameState.score(GameState.PLAYER1), gameState.score(GameState.PLAYER2));
 	}
 	
+	// Write to a CSV file the winner's name and score
 	private void recordHighScore(int winner, int score) {
 		try {
 			FileWriter pw = new FileWriter("text-assets/scores.csv",true);
@@ -218,8 +222,13 @@ public class GameController {
 			int score2 = gameState.score(GameState.PLAYER2);
 			int[] playerScores = {score1,score2};
 			int winner = 0;
-			// Figure out the winner
-			if (score2 > score1) winner = 1;
+			if (resigned) {
+				winner = (gameState.nextPlayerToMove+1) % 2; // other player wins
+			} else {
+				// Figure out the winner based on score
+				if (score2 > score1) winner = 1;
+			}
+			// record the winner's score
 			recordHighScore(winner, playerScores[winner]);
 			window.gameOverModel = new GameOverViewModel(
 					gameViewModel.numPlayers, 
@@ -235,6 +244,7 @@ public class GameController {
 	}
 
 	public void resign() {
+		resigned = true;
 		gameOver();
 	}
 }

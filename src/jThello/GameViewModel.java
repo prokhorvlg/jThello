@@ -538,7 +538,6 @@ public class GameViewModel implements ModelInterface {
 	    // Initialize default states for all board elements.
 		gameController.resetBoard();
 		gameController.setStatus("Loading game...", Color.BLACK);
-		gameController.updateScores(0,0);
 
 		// TODO: account for randomization in game generation. Robot can be player 1?
 		gameController.initializePlayers(vsAI, playerNames[0], playerNames[1]);
