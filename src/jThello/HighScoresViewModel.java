@@ -5,10 +5,13 @@ import Libraries.CustomButton;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class HighScoresViewModel implements ModelInterface {
 	
@@ -17,6 +20,7 @@ public class HighScoresViewModel implements ModelInterface {
 	public JLabel jlabel;
 
 	public JEditorPane contentPane;
+	JTable scoresTable;
 
 	public CustomButton backButton;
 	
@@ -36,6 +40,10 @@ public class HighScoresViewModel implements ModelInterface {
 
 	@Override
 	public JPanel getModel() {
+		// Update high scores table while getting model.
+		updateHighScores();
+
+		// Return the view.
 		return highScoresView;
 	}
 
@@ -60,10 +68,12 @@ public class HighScoresViewModel implements ModelInterface {
 		titleContainer.add(Box.createHorizontalGlue());
 
 		// Create scrollable information field.
-		Object[][] scoresData = highScoresController.convertListIntoObject(highScoresController.readCSVIntoList("text-assets/scores.csv"));
-		String[] columnNames = {"Player Name", "Score"};
+		List<Score> myScores = highScoresController.readCSVIntoList("text-assets/scores.csv");
+		highScoresController.sortListOfScores(myScores);
+		Object[][] scoresData = highScoresController.convertListIntoObject(myScores);
+		String[] columnNames = {"Rank", "Name", "Score"};
 
-		JTable scoresTable = new JTable(scoresData, columnNames);
+		scoresTable = new JTable(scoresData, columnNames);
 
 		scoresTable.setShowGrid(false);
 		scoresTable.setIntercellSpacing(new Dimension(10, 10));
@@ -127,6 +137,16 @@ public class HighScoresViewModel implements ModelInterface {
 		lowerHalf.add(lowerHalfLowerC);
 
 		highScoresView.add(lowerHalf, BorderLayout.SOUTH);
+	}
+
+	private void updateHighScores() {
+		List<Score> myScores = highScoresController.readCSVIntoList("text-assets/scores.csv");
+		highScoresController.sortListOfScores(myScores);
+		Object[][] scoresData = highScoresController.convertListIntoObject(myScores);
+		String[] columnNames = {"Rank", "Name", "Score"};
+
+		TableModel model = new DefaultTableModel(scoresData, columnNames);
+		scoresTable.setModel( model );
 	}
 }
 

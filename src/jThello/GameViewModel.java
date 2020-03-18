@@ -351,20 +351,16 @@ public class GameViewModel implements ModelInterface {
 
 		// -- TURN (label which displays who's turn it is)
 
-		rightTurnP.setLayout(new BoxLayout(rightTurnP, BoxLayout.X_AXIS));
-		rightTurnP.add(Box.createHorizontalGlue());
 
 		rightTurnPInner = new JPanel();
 		rightTurnPInner.setLayout(new BoxLayout(rightTurnPInner, BoxLayout.X_AXIS));
-		rightTurnPInner.add(Box.createRigidArea(new Dimension(20, 0)));
+		rightTurnPInner.add(Box.createHorizontalGlue());
 		turnTracker.setFont(window.fontTexBold.deriveFont(30f));
 		turnTracker.setForeground(window.ColorPrimary);
 		rightTurnPInner.add(turnTracker);
-		rightTurnPInner.add(Box.createRigidArea(new Dimension(20, 0)));
+		rightTurnPInner.add(Box.createHorizontalGlue());
 		rightTurnPInner.setBackground(Color.BLACK);
-		rightTurnP.add(rightTurnPInner);
 
-		rightTurnP.add(Box.createHorizontalGlue());
 
 		// -- SCORE 1
 
@@ -478,7 +474,7 @@ public class GameViewModel implements ModelInterface {
 
 		// Add to right side, then to upper half.
 
-		rightSide.add(rightTurnP);
+		rightSide.add(rightTurnPInner);
 		rightSide.add(Box.createRigidArea(new Dimension(0, 20)));
 		rightSide.add(rightScoreP1);
 		rightSide.add(rightScoreP2);

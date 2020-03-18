@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HighScoresController {
@@ -48,13 +49,17 @@ public class HighScoresController {
 		return myScores;
 	}
 
+	public void sortListOfScores(List<Score> myScores) {
+		myScores.sort(Collections.reverseOrder());
+	}
+
 	public Object[][] convertListIntoObject(List<Score> myScores) {
 		Object[][] myScoresObject = new Object[myScores.size()][];
 
 		// Cycle through each score and convert into object array.
 		int counter = 0;
 		for (Score score : myScores) {
-			myScoresObject[counter] = new Object[]{score.name, score.score};
+			myScoresObject[counter] = new Object[]{counter+1, score.name, score.score};
 			counter++;
 		}
 
