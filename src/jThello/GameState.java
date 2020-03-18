@@ -134,7 +134,7 @@ public class GameState {
 		int score = 0;
         for(int i = 0; i < size; i++)
             for(int j = 0; j < size; j++)
-                if (board[i][j] == PLAYER1) score++;
+                if (board[i][j] == player) score++;
         return score;
 	}
     

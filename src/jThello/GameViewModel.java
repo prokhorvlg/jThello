@@ -388,6 +388,8 @@ public class GameViewModel implements ModelInterface {
 		tracker1Piece = window.loadImage("images/jThello-piece-black-nobg.png");
 		tracker1Score.setFont(window.fontTexBold.deriveFont(20f));
 		tracker1Score.setForeground(Color.BLACK);
+		tracker1Score.setBackground(Color.WHITE);
+		tracker1Score.setOpaque(true);
 		tracker1LowerPanel.add(Box.createRigidArea(new Dimension(20, 0)));
 		tracker1LowerPanel.add(tracker1Piece);
 		tracker1LowerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -421,6 +423,8 @@ public class GameViewModel implements ModelInterface {
 		tracker2Piece = window.loadImage("images/jThello-piece-white-nobg.png");
 		tracker2Score.setFont(window.fontTexBold.deriveFont(20f));
 		tracker2Score.setForeground(Color.WHITE);
+		tracker2Score.setBackground(Color.BLACK);
+		tracker2Score.setOpaque(true);
 		tracker2LowerPanel.add(Box.createRigidArea(new Dimension(20, 0)));
 		tracker2LowerPanel.add(tracker2Piece);
 		tracker2LowerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -457,6 +461,8 @@ public class GameViewModel implements ModelInterface {
 		rightStatusActual = new JLabel("Script loading.");
 		rightStatusActual.setFont(window.fontTexBold.deriveFont(12f));
 		rightStatusActual.setForeground(Color.WHITE);
+		rightStatusActual.setBackground(Color.BLACK);
+		rightStatusActual.setOpaque(true);
 		rightStatusLower.add(Box.createRigidArea(new Dimension(20, 0)));
 		rightStatusLower.add(rightStatusActual);
 		rightStatusLower.add(Box.createHorizontalGlue());
