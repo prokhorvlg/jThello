@@ -27,7 +27,7 @@ public class SetPlayerNameController {
 					if (myPlayer.equals("")) {
 						myPlayer = "Player";
 					}
-					String[] playerNames = { myPlayer, "Computer" };
+					String[] playerNames = { myPlayer, "AI" };
 
 					// AI
 					window.gameViewModel = new GameViewModel(true, numPlayers, playerNames);

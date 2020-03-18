@@ -3,12 +3,20 @@ package jThello;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.List;
 
 public class GameController {
 
 	GameViewModel gameViewModel;
+	GameState gameState;
 	MainWindow window;
-
+	Player[] players;
+	
+	GameController() {
+		gameState = new GameState(8);
+		players = new Player[2];
+	}
+	
 	public void initializeEventHandlers(GameViewModel _gameViewModel, MainWindow _window) {
 		gameViewModel = _gameViewModel;
 		window = _window;
@@ -36,12 +44,12 @@ public class GameController {
 		for (int x = 0; x < 8; x++) {
 			// For each column...
 			for (int y = 0; y < 8; y++) {
-				gameViewModel.boardIcons[x][y].addMouseListener(new boardIconListener(x, y));
+				gameViewModel.boardIcons[y][x].addMouseListener(new boardIconListener(x, y));
 			}
 		}
 	}
 
-	private static class boardIconListener extends MouseAdapter {
+	private class boardIconListener extends MouseAdapter {
 		private int x, y;
 		boardIconListener(int _x, int _y) {
 			x = _x;
@@ -55,6 +63,33 @@ public class GameController {
 			// gameInput(x, y);
 
 			// TODO: Enter back end call here.
+			System.out.println("(" + x + ", " + y + ")");
+			List<Move> possibleMoves = gameState.generateMoves();
+			for (Move m: possibleMoves) {
+				System.out.print(m+" ");
+			}
+			System.out.println();
+			if (possibleMoves.size() == 0) {
+				setStatus("No Legal Moves", Color.RED);
+				return;
+			}
+			System.out.println(gameState.toString());
+			Move m = new Move(gameState.nextPlayerToMove, x, y);
+			System.out.println(m);
+			if (possibleMoves.contains(m)) {
+				setStatus(m.toString(), Color.BLACK);
+				gameState = gameState.applyMoveAndClone(m);
+				System.out.println(gameState.toString());
+				try {
+					updateBoard(gameState.board);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				setCurrentPlayer(gameState.nextPlayerToMove);
+			}
+			else {
+				setStatus("Ilegal Move", Color.RED);
+			}
 		}
 	}
 
@@ -62,23 +97,28 @@ public class GameController {
 	// Event handlers for each of the squares. Back end will handle bad input.
 
 	// Initialize the GUI display for players and names.
-	public void initializePlayers(String name1, String name2) {
+	public void initializePlayers(boolean _vsAI, String name1, String name2) {
 		gameViewModel.tracker1Name.setText(name1);
 		gameViewModel.tracker2Name.setText(name2);
+		players[0] = new HumanPlayer();
+		if (_vsAI) players[1] = new AIPlayer();
+		else players[1] = new HumanPlayer();
 	}
 
 	// Sets the current active player in the GUI based on the given input.
 	// Essentially recolors the track/score elements and changes colors, and displays given string.
 	// Keep string to under about 15 characters to prevent visual bugs.
-	public void setCurrentPlayer(int player, String input) {
+	public void setCurrentPlayer(int player) {
 		if (player == 0) {
 			gameViewModel.rightTurnPInner.setBackground(Color.WHITE);
 			gameViewModel.turnTracker.setForeground(Color.BLACK);
+			gameViewModel.turnTracker.setText(gameViewModel.tracker1Name.getText() + "'s Turn");
 		} else {
 			gameViewModel.rightTurnPInner.setBackground(Color.BLACK);
 			gameViewModel.turnTracker.setForeground(Color.WHITE);
+			gameViewModel.turnTracker.setText(gameViewModel.tracker2Name.getText() + "'s Turn");
 		}
-		gameViewModel.turnTracker.setText(input);
+		// gameViewModel.turnTracker.setText(input);
 	}
 
 	// Update scores on GUI.
@@ -104,7 +144,7 @@ public class GameController {
 		for (int x = 0; x < 8; x++) {
 			// For each column...
 			for (int y = 0; y < 8; y++) {
-				gameViewModel.boardIcons[x][y].setIcon(gameViewModel.loadPieceImage(board[x][y]));
+				gameViewModel.boardIcons[y][x].setIcon(gameViewModel.loadPieceImage(board[x][y]));
 			}
 		}
 	}
@@ -122,10 +162,10 @@ public class GameController {
 		}
 
 		// Place in the 4 starting pieces.
-		resetBoard[3][3] = 1;
-		resetBoard[4][4] = 1;
-		resetBoard[3][4] = 0;
-		resetBoard[4][3] = 0;
+		resetBoard[3][3] = 0;
+		resetBoard[4][4] = 0;
+		resetBoard[3][4] = 1;
+		resetBoard[4][3] = 1;
 
 		// Run the board.
 		updateBoard(resetBoard);

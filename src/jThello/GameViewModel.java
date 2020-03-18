@@ -22,6 +22,7 @@ public class GameViewModel implements ModelInterface {
 	int numPlayers = -1;
 	// Player name(s)
 	String[] playerNames = new String[2];
+	
 	// Winner text (you win!, you lost!, name won!)
 	String winner = "Error occurred.";
 	// Color of the winner text. If you lost, it's red, if you won, it's window.ColorHighlight (our brand green), etc...
@@ -535,9 +536,9 @@ public class GameViewModel implements ModelInterface {
 		gameController.updateScores(0,0);
 
 		// TODO: account for randomization in game generation. Robot can be player 1?
-		gameController.initializePlayers(playerNames[0], playerNames[1]);
+		gameController.initializePlayers(vsAI, playerNames[0], playerNames[1]);
 
-		gameController.setCurrentPlayer(0, "Alice's Turn");
+		gameController.setCurrentPlayer(0);
 	}
 
 	public JPanel getModel() {
