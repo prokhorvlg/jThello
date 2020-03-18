@@ -155,6 +155,7 @@ public class GameController {
 	public void setStatus(String status, Color statusColor) {
 		gameViewModel.rightStatus.setBackground(statusColor);
 		gameViewModel.rightStatusActual.setText(status);
+		gameViewModel.rightStatusActual.setBackground(statusColor);
 	}
 
 	// Updates the entire board GUI using game state of board.
